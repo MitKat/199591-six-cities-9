@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Katerina Miteneva](https://up.htmlacademy.ru/react/9/user/199591).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Карямин](https://htmlacademy.ru/profile/id959581).
 
 ---
 
