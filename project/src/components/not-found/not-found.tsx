@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, ClassLogo } from '../../const';
 import Logo from '../logo/logo';
 
 function NotFound(): JSX.Element {
@@ -9,7 +9,7 @@ function NotFound(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo />
+              <Logo className={ClassLogo.Header} />
             </div>
           </div>
         </div>

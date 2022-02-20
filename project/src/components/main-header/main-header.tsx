@@ -1,3 +1,4 @@
+import { ClassLogo } from '../../const';
 import Logo from '../logo/logo';
 
 function MainHeader(): JSX.Element {
@@ -6,7 +7,7 @@ function MainHeader(): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo />
+            <Logo className={ClassLogo.Header} />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
