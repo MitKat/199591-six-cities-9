@@ -6,7 +6,7 @@ import FavoritePlaceCard from './favorite-place-card';
 function Favorites(): JSX.Element {
   return (
     <div className="page">
-      <MainHeader statusLogo='Inactive' />
+      <MainHeader activeLogo={false} />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

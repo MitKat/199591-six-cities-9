@@ -1,22 +1,17 @@
 import Logo from '../logo/logo';
 
-const ActiveLogo = {
-  Active: 'true',
-  Inactive: 'false',
-} as const;
-
 type MainHeaderProps = {
-  statusLogo: 'Active' | 'Inactive';
+  activeLogo: boolean;
 }
 
-function MainHeader({statusLogo}: MainHeaderProps): JSX.Element {
-  const status =ActiveLogo[statusLogo];
+function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
+  const isActive = activeLogo;
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            {(status === 'true') ?
+            {isActive ?
               <Logo type='HeaderActive' size='Big' />
               : <Logo type='Header' size='Big' />}
           </div>
