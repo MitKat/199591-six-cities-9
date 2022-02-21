@@ -1,4 +1,3 @@
-import { ClassLogo } from '../../const';
 import Logo from '../logo/logo';
 
 function SignIn(): JSX.Element {
@@ -8,7 +7,7 @@ function SignIn(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo className={ClassLogo.Header} />
+              <Logo type='Header' size='Big' />
             </div>
           </div>
         </div>

@@ -1,12 +1,12 @@
 import Logo from '../logo/logo';
-import { ClassLogo } from '../../const';
 import MainHeader from '../main-header/main-header';
 import FavoritePlaceCard from './favorite-place-card';
+
 
 function Favorites(): JSX.Element {
   return (
     <div className="page">
-      <MainHeader />
+      <MainHeader statusLogo='Inactive' />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -43,7 +43,7 @@ function Favorites(): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <Logo className={ClassLogo.Footer} />
+        <Logo type='Footer' size='Small' />
       </footer>
     </div>
   );

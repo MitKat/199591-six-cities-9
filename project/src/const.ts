@@ -12,8 +12,3 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum ClassLogo {
-  HeaderMainPage = 'header__logo-link header__logo-link--active',
-  Header = 'header__logo-link',
-  Footer = 'footer__logo-link',
-}

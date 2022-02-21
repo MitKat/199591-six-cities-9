@@ -1,13 +1,24 @@
-import { ClassLogo } from '../../const';
 import Logo from '../logo/logo';
 
-function MainHeader(): JSX.Element {
+const ActiveLogo = {
+  Active: 'true',
+  Inactive: 'false',
+} as const;
+
+type MainHeaderProps = {
+  statusLogo: 'Active' | 'Inactive';
+}
+
+function MainHeader({statusLogo}: MainHeaderProps): JSX.Element {
+  const status =ActiveLogo[statusLogo];
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo className={ClassLogo.Header} />
+            {(status === 'true') ?
+              <Logo type='HeaderActive' size='Big' />
+              : <Logo type='Header' size='Big' />}
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

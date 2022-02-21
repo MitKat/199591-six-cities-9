@@ -8,7 +8,7 @@ type MainProps = {
 function Main({countOffer}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <MainHeader />
+      <MainHeader statusLogo='Active' />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
