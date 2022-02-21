@@ -1,10 +1,12 @@
+import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
 import FavoritePlaceCard from './favorite-place-card';
+
 
 function Favorites(): JSX.Element {
   return (
     <div className="page">
-      <MainHeader />
+      <MainHeader activeLogo={false} />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -41,9 +43,7 @@ function Favorites(): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        <Logo type='Footer' size='Small' />
       </footer>
     </div>
   );

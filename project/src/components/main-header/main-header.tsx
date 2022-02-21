@@ -1,12 +1,19 @@
 import Logo from '../logo/logo';
 
-function MainHeader(): JSX.Element {
+type MainHeaderProps = {
+  activeLogo: boolean;
+}
+
+function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
+  const isActive = activeLogo;
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo />
+            {isActive ?
+              <Logo type='HeaderActive' size='Big' />
+              : <Logo type='Header' size='Big' />}
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

@@ -7,7 +7,7 @@ function SignIn(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo />
+              <Logo type='Header' size='Big' />
             </div>
           </div>
         </div>
