@@ -1,6 +1,6 @@
-import PlaceCard from './place-card/place-card';
 import MainHeader from '../main-header/main-header';
 import { Offer } from '../../mocks/offers';
+import PlaceCardList from '../place-card-list/place-card-list';
 
 type MainProps = {
   countOffer: number;
@@ -70,11 +70,7 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard offerItem={offers[0]} />
-                <PlaceCard offerItem={offers[1]} />
-                <PlaceCard offerItem={offers[2]} />
-                <PlaceCard offerItem={offers[3]} />
-                <PlaceCard offerItem={offers[0]} />
+                <PlaceCardList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">

@@ -1,9 +1,13 @@
+import { Offer } from '../../mocks/offers';
 import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
 import FavoritePlaceCard from './favorite-place-card';
 
+type FavoritesProps = {
+  offers: Offer[];
+}
 
-function Favorites(): JSX.Element {
+function Favorites({offers}: FavoritesProps): JSX.Element {
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
@@ -21,8 +25,8 @@ function Favorites(): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <FavoritePlaceCard />
-                  <FavoritePlaceCard />
+                  <FavoritePlaceCard offerItem={offers[0]} />
+                  <FavoritePlaceCard offerItem={offers[1]}/>
                 </div>
               </li>
 
@@ -35,7 +39,7 @@ function Favorites(): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <FavoritePlaceCard />
+                  <FavoritePlaceCard offerItem={offers[2]}/>
                 </div>
               </li>
             </ul>

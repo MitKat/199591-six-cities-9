@@ -1,11 +1,11 @@
-import {Offer} from '../../../mocks/offers';
+import {Offer} from '../../mocks/offers';
 
 type PlaceCardProps = {
   offerItem: Offer;
 }
 
 function PlaceCard({offerItem}: PlaceCardProps): JSX.Element {
-  const {price, title, previewImage, type} = offerItem;
+  const {price, title, previewImage, type, rating} = offerItem;
   return (
     <article className="cities__place-card place-card">
       <div className="place-card__mark">
@@ -31,7 +31,7 @@ function PlaceCard({offerItem}: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: 80}}></span>
+            <span style={{width: rating}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

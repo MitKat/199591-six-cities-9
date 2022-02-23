@@ -133,7 +133,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10,
       },
-      name: 'Paris',
+      name: 'Amsterdam',
     },
   },
   {
