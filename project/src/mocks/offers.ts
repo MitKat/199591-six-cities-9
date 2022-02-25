@@ -36,7 +36,7 @@ export type Offer = {
 export const offers: Offer[] = [
   {
     id: 1,
-    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
+    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
     title: 'Beautiful &amp; luxurious studio at great location',
     type: 'Apartment',
     bedrooms: 4,
@@ -70,7 +70,7 @@ export const offers: Offer[] = [
   },
   {
     id: 2,
-    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
+    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
     title: 'Beautiful &amp; luxurious studio at great location',
     type: 'Apartment',
     bedrooms: 2,

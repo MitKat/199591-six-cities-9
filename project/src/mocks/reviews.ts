@@ -4,24 +4,36 @@ export type Review = {
   id: number
   rating: number
   user: {
-  avatarUrl: string
-  id: number
-  isPro: boolean
-  name: string
+    avatarUrl: string
+    id: number
+    isPro: boolean
+    name: string
   }
 }
 
-export const review: Review[] = [
+export const reviews: Review[] = [
   {
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     date: 'Tue Feb 22 2022 13:07:16 GMT+0300 (Москва, стандартное время)',
-    id: 7,
+    id: 1,
     rating: 4.5,
     user: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-max.jpg',
       id: 6,
       isPro: true,
-      name: 'Oliver.conner',
+      name: 'MaxIvan',
+    },
+  },
+  {
+    comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    date: 'Tue Feb 22 2022 13:07:16 GMT+0300 (Москва, стандартное время)',
+    id: 2,
+    rating: 4.5,
+    user: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 7,
+      isPro: true,
+      name: 'Max',
     },
   },
 ];
