@@ -47,7 +47,7 @@ export const offers: Offer[] = [
     host: {
       avatarUrl: 'img/avatar-angelina.jpg',
       id: 1,
-      isPro: true,
+      isPro: false,
       name: 'Angelina',
     },
     location: {
@@ -58,7 +58,7 @@ export const offers: Offer[] = [
     maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4,
+    rating: 3.4,
     city: {
       location: {
         latitude: 52.370216,
@@ -149,7 +149,7 @@ export const offers: Offer[] = [
     host: {
       avatarUrl: 'img/avatar-angelina.jpg',
       id: 8,
-      isPro: true,
+      isPro: false,
       name: 'Angelina',
     },
     location: {
@@ -160,7 +160,7 @@ export const offers: Offer[] = [
     maxAdults: 2,
     previewImage: 'img/apartment-01.jpg',
     price: 80,
-    rating: 4.9,
+    rating: 2,
     city: {
       location: {
         latitude: 52.370216,

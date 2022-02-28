@@ -1,7 +1,16 @@
 import { Offer } from '../../mocks/offers';
 import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
-import FavoritePlaceCard from './favorite-place-card';
+import FavoritesListPlaces from './favorites-list-places';
+
+// const CityName = {
+//   Paris: 'Paris',
+//   Cologne: 'Cologne',
+//   Brussels: 'Brussels',
+//   Amsterdam: 'Amsterdam',
+//   Hamburg: 'Hamburg',
+//   Dusseldorf: 'Dusseldorf',
+// } as const;
 
 type FavoritesProps = {
   offers: Offer[];
@@ -16,32 +25,24 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href=" ">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <FavoritePlaceCard offerItem={offers[0]} />
-                  <FavoritePlaceCard offerItem={offers[1]}/>
-                </div>
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href=" ">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <FavoritePlaceCard offerItem={offers[2]}/>
-                </div>
-              </li>
+              {
+                offers.map((offer) =>
+                  (
+                    <li className="favorites__locations-items" key={offer.id}>
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <a className="locations__item-link" href=" ">
+                            <span>{offer.city.name}</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="favorites__places">
+                        <FavoritesListPlaces offers={offers} />
+                      </div>
+                    </li>
+                  ),
+                )
+              }
             </ul>
           </section>
         </div>

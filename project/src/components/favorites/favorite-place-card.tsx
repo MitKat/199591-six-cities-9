@@ -1,11 +1,12 @@
 import { Offer } from '../../mocks/offers';
+import getPercRating from '../../utils';
 
 type FavoritePlaceCardProps = {
   offerItem: Offer;
 }
 
 function FavoritePlaceCard({offerItem}: FavoritePlaceCardProps): JSX.Element {
-  const {previewImage, price, title, type} = offerItem;
+  const {previewImage, price, title, type, rating} = offerItem;
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -28,7 +29,7 @@ function FavoritePlaceCard({offerItem}: FavoritePlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: 100}}></span>
+            <span style={{width: getPercRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

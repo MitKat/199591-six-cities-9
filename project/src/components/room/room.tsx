@@ -2,6 +2,9 @@ import { Offer } from '../../mocks/offers';
 import { Review } from '../../mocks/reviews';
 import MainHeader from '../main-header/main-header';
 import Reviews from '../reviews/reviews';
+import getPercRating from '../../utils';
+import HostUser from './host-user';
+import FormNewComment from '../form-new-comment/form-new-comment';
 
 
 type RoomProps = {
@@ -10,7 +13,7 @@ type RoomProps = {
 }
 
 function Room({offerItem, reviews}: RoomProps): JSX.Element {
-  const {title, images, rating, type, bedrooms, maxAdults, price, goods, host} = offerItem;
+  const {title, images, rating, type, bedrooms, maxAdults, price, goods, host, isPremium} = offerItem;
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
@@ -27,9 +30,12 @@ function Room({offerItem, reviews}: RoomProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {
+                (isPremium) &&
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div>
+              }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -43,7 +49,7 @@ function Room({offerItem, reviews}: RoomProps): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: 80}}></span>
+                  <span style={{width: getPercRating(rating)}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -76,15 +82,9 @@ function Room({offerItem, reviews}: RoomProps): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
-                  </div>
-                  <span className="property__user-name">
-                    {host.name}
-                  </span>
-                  <span className="property__user-status">
-                    Pro
-                  </span>
+                  {host.isPro ?
+                    <HostUser type='Pro' offer={offerItem} />
+                    : <HostUser type='NotPro' offer={offerItem} />}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -95,7 +95,10 @@ function Room({offerItem, reviews}: RoomProps): JSX.Element {
                   </p>
                 </div>
               </div>
-              <Reviews reviews={reviews} />
+              <section className="property__reviews reviews">
+                <Reviews reviews={reviews} />
+                <FormNewComment />
+              </section>
             </div>
           </div>
           <section className="property__map map"></section>

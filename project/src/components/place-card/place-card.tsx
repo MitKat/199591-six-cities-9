@@ -1,26 +1,31 @@
 import {Offer} from '../../mocks/offers';
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
+import getPercRating from '../../utils';
 
 type PlaceCardProps = {
   offerItem: Offer;
 }
 
 function PlaceCard({offerItem}: PlaceCardProps): JSX.Element {
-  const {price, title, previewImage, type, rating, id} = offerItem;
+  const {price, title, previewImage, type, rating, id, isPremium} = offerItem;
   const mouseOverHandler = () => {
     setMouseOver(mouseOver);
   };
+
 
   const [mouseOver, setMouseOver] = useState(id);
 
   return (
     <article className="cities__place-card place-card" onMouseOver={mouseOverHandler}>
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {
+        (isPremium) &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={'/offer/:{mouseOver}'}>
+        <Link to={`/offer/${mouseOver}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
         </Link>
       </div>
@@ -39,7 +44,7 @@ function PlaceCard({offerItem}: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: rating}}></span>
+            <span style={{width: getPercRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
