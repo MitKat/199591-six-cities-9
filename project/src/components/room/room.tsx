@@ -5,15 +5,20 @@ import Reviews from '../reviews/reviews';
 import getPercRating from '../../utils';
 import HostUser from './host-user';
 import FormNewComment from '../form-new-comment/form-new-comment';
+import { useParams } from 'react-router-dom';
 
 
 type RoomProps = {
-  offerItem: Offer;
+  offers: Offer[];
   reviews: Review[];
 }
 
-function Room({offerItem, reviews}: RoomProps): JSX.Element {
-  const {title, images, rating, type, bedrooms, maxAdults, price, goods, host, isPremium} = offerItem;
+function Room({offers, reviews}: RoomProps): JSX.Element {
+
+  const {id} = useParams();
+
+  const index = offers.findIndex((offer) => String(offer.id) === id);
+  const {title, images, rating, type, bedrooms, maxAdults, price, goods, host, isPremium, isFavorite} = offers[index];
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
@@ -40,16 +45,26 @@ function Room({offerItem, reviews}: RoomProps): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {
+                  isFavorite ?
+                    <button className="property__bookmark-button property__bookmark-button--active button" type="button">
+                      <svg className="property__bookmark-icon" width="31" height="33">
+                        <use xlinkHref="#icon-bookmark"></use>
+                      </svg>
+                      <span className="visually-hidden">In bookmarks</span>
+                    </button>
+                    :
+                    <button className="property__bookmark-button button" type="button">
+                      <svg className="property__bookmark-icon" width="31" height="33">
+                        <use xlinkHref="#icon-bookmark"></use>
+                      </svg>
+                      <span className="visually-hidden">To bookmarks</span>
+                    </button>
+                }
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: getPercRating(rating)}}></span>
+                  <span style={{width: `${getPercRating(rating)}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -83,8 +98,8 @@ function Room({offerItem, reviews}: RoomProps): JSX.Element {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   {host.isPro ?
-                    <HostUser type='Pro' offer={offerItem} />
-                    : <HostUser type='NotPro' offer={offerItem} />}
+                    <HostUser type='Pro' offer={offers[index]} />
+                    : <HostUser type='NotPro' offer={offers[index]} />}
                 </div>
                 <div className="property__description">
                   <p className="property__text">

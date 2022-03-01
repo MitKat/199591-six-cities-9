@@ -2,44 +2,42 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const starsReview = [
   {
-    id: '1',
+    id: 1,
     name: '1-star',
     title: 'terribly',
   },
   {
-    id: '2',
+    id: 2,
     name: '2-star',
     title: 'badly',
   },
   {
-    id: '3',
+    id: 3,
     name: '3-star',
     title: 'not bad',
   },
   {
-    id: '4',
+    id: 4,
     name: '4-star',
     title: 'good',
   },
   {
-    id: '5',
+    id: 5,
     name: '5-star',
     title: 'perfect',
   },
 ];
 
 function FormNewComment(): JSX.Element {
-  const [formData, setFormData] = useState({review: ''});
-  const [rating, setRating] = useState({star: ''});
+  const [textComment, setTextComment] = useState('');
+  const [rating, setRating] = useState(0);
 
   const textChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const {name, value} = evt.target;
-    setFormData({...formData, [name]: value});
+    setTextComment(evt.target.value);
   };
 
   const ratingChangeHandle = (evt: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = evt.target;
-    setRating({...rating, [name]: value});
+    setRating(parseInt(evt.target.value, 10));
   };
 
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
@@ -49,18 +47,20 @@ function FormNewComment(): JSX.Element {
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={formSubmitHandle}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating" onChange={ratingChangeHandle}>
+      <div className="reviews__rating-form form__rating">
         {starsReview.map((star) => (
           <>
             <input
               className="form__rating-input visually-hidden"
               key={star.id}
-              name={rating.star}
-              value={star.id}
-              id={star.name}
+              name={star.name}
+              value={String(star.id)}
+              id={String(star.id)}
               type="radio"
+              checked={rating === star.id}
+              onChange={ratingChangeHandle}
             />
-            <label htmlFor={star.title} className="reviews__rating-label form__rating-label" title={star.title}>
+            <label htmlFor={String(star.id)} className="reviews__rating-label form__rating-label" title={star.title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>
               </svg>
@@ -72,7 +72,7 @@ function FormNewComment(): JSX.Element {
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
-        value={formData.review}
+        value={textComment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={textChangeHandle}
       >
@@ -84,7 +84,7 @@ function FormNewComment(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating.star === '' || formData.review === ''}
+          disabled={rating === 0 || textComment === ''}
         >
           Submit
         </button>

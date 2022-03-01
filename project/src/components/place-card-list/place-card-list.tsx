@@ -11,7 +11,7 @@ function PlaceCardList({offers}: PlaceCardListProps): JSX.Element {
   return (
     <Fragment>
       {offers.map((offer) => (
-        <PlaceCard key={offer.id} offerItem={offer} />
+        <PlaceCard key={offer.id} offerItem={offer} typeCard='Normal' />
       )) }
     </Fragment>
   );

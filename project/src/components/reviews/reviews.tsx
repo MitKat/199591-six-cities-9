@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import dayjs from 'dayjs';
 import { Review } from '../../mocks/reviews';
 import getPercRating from '../../utils';
 
@@ -14,7 +15,8 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
       </h2>
       <ul className="reviews__list">
         {reviews.map((review) => {
-          const {comment, user, id, rating} = review;
+          const {comment, user, id, rating, date} = review;
+          const dateReview = dayjs(date).format('MMMM YYYY');
           return(
             <li className="reviews__item" key={id}>
               <div className="reviews__user user">
@@ -28,14 +30,14 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
               <div className="reviews__info">
                 <div className="reviews__rating rating">
                   <div className="reviews__stars rating__stars">
-                    <span style={{width: getPercRating(rating)}}></span>
+                    <span style={{width: `${getPercRating(rating)}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                 </div>
                 <p className="reviews__text">
                   {comment}
                 </p>
-                <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+                <time className="reviews__time" dateTime="2019-04-24">{dateReview}</time>
               </div>
             </li>
           );

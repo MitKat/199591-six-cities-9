@@ -26,7 +26,7 @@ function App({countOffer, offers, reviews}: AppProps): JSX.Element {
         />
         <Route path={AppRoute.Room}
           element={
-            <Room offerItem={offers[0]} reviews={reviews}/>
+            <Room offers={offers} reviews={reviews}/>
           }
         />
         <Route path={AppRoute.SignIn} element={<SignIn />} />
