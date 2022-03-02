@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import PlaceCard from '../place-card/place-card';
-import { FavoriteOffer } from '../../mocks/favorteOffers';
+import { FavoriteOffer } from '../../mocks/favoriteOffers';
 
 type FavoritesListPlacesProps = {
   favoriteOffers: FavoriteOffer[];

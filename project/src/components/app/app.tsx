@@ -8,7 +8,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import {Offer} from '../../mocks/offers';
 import { Review } from '../../mocks/reviews';
-import { FavoriteOffer } from '../../mocks/favorteOffers';
+import { FavoriteOffer } from '../../mocks/favoriteOffers';
 
 type AppProps = {
   countOffer: number;

@@ -1,4 +1,4 @@
-import { FavoriteOffer } from '../../mocks/favorteOffers';
+import { FavoriteOffer } from '../../mocks/favoriteOffers';
 import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
 import FavoritesListPlaces from './favorites-list-places';
