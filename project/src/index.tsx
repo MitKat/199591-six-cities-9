@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { offers } from './mocks/offers';
 import { reviews } from './mocks/reviews';
+import { favoriteOffers } from './mocks/favorteOffers';
 
 const Setting = {
   COUNT_OFFER: 323,
@@ -14,6 +15,7 @@ ReactDOM.render(
       countOffer = {Setting.COUNT_OFFER}
       offers = {offers}
       reviews = {reviews}
+      favoriteOffers = {favoriteOffers}
     />
   </React.StrictMode>,
   document.getElementById('root'));

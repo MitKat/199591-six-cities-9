@@ -8,14 +8,16 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import {Offer} from '../../mocks/offers';
 import { Review } from '../../mocks/reviews';
+import { FavoriteOffer } from '../../mocks/favorteOffers';
 
 type AppProps = {
   countOffer: number;
   offers: Offer[];
   reviews: Review[];
+  favoriteOffers: FavoriteOffer[];
 }
 
-function App({countOffer, offers, reviews}: AppProps): JSX.Element {
+function App({countOffer, offers, reviews, favoriteOffers}: AppProps): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -35,7 +37,7 @@ function App({countOffer, offers, reviews}: AppProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <Favorites offers={offers}/>
+              <Favorites favoriteOffers={favoriteOffers}/>
             </PrivateRoute>
           }
         />

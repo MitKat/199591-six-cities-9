@@ -1,22 +1,21 @@
-import { Offer } from '../../mocks/offers';
+import { FavoriteOffer } from '../../mocks/favorteOffers';
 import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
 import FavoritesListPlaces from './favorites-list-places';
 
-// const CityName = {
-//   Paris: 'Paris',
-//   Cologne: 'Cologne',
-//   Brussels: 'Brussels',
-//   Amsterdam: 'Amsterdam',
-//   Hamburg: 'Hamburg',
-//   Dusseldorf: 'Dusseldorf',
-// } as const;
-
 type FavoritesProps = {
-  offers: Offer[];
+  favoriteOffers: FavoriteOffer[];
 }
 
-function Favorites({offers}: FavoritesProps): JSX.Element {
+function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
+  const cityList = favoriteOffers.map((offer) =>(offer.city.name));
+  const cityNames = Array.from(new Set(cityList));
+
+  const newArray = cityNames.map((city) => {
+    const places = favoriteOffers.filter((offer) => offer.city.name === city);
+    return {city, places};
+  });
+
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
@@ -26,18 +25,18 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {
-                offers.map((offer) =>
+                newArray.map((offer) =>
                   (
-                    <li className="favorites__locations-items" key={offer.id}>
+                    <li className="favorites__locations-items" key={offer.city}>
                       <div className="favorites__locations locations locations--current">
                         <div className="locations__item">
                           <a className="locations__item-link" href=" ">
-                            <span>{offer.city.name}</span>
+                            <span>{offer.city}</span>
                           </a>
                         </div>
                       </div>
                       <div className="favorites__places">
-                        <FavoritesListPlaces offers={offers} />
+                        <FavoritesListPlaces favoriteOffers={offer.places} />
                       </div>
                     </li>
                   ),

@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
+const MIN_LENGTH_REVIEW = 50;
+const MAX_LENGTH_REVIEW = 300;
+
 const starsReview = [
   {
     id: 1,
@@ -84,7 +87,7 @@ function FormNewComment(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating === 0 || textComment === ''}
+          disabled={rating === 0 || textComment.length < MIN_LENGTH_REVIEW || textComment.length > MAX_LENGTH_REVIEW}
         >
           Submit
         </button>
