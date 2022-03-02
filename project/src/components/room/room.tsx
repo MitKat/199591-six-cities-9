@@ -18,7 +18,7 @@ function Room({offers, reviews}: RoomProps): JSX.Element {
   const {id} = useParams();
 
   const index = offers.findIndex((offer) => String(offer.id) === id);
-  const {title, images, rating, type, bedrooms, maxAdults, description, price, goods, host, isPremium, isFavorite} = offers[index];
+  const {title, images, rating, type, bedrooms, maxAdults, description, price, goods, isPremium, isFavorite} = offers[index];
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
