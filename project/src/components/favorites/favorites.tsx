@@ -1,9 +1,21 @@
+import { FavoriteOffer } from '../../mocks/favoriteOffers';
 import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
-import FavoritePlaceCard from './favorite-place-card';
+import FavoritesListPlaces from './favorites-list-places';
 
+type FavoritesProps = {
+  favoriteOffers: FavoriteOffer[];
+}
 
-function Favorites(): JSX.Element {
+function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
+  const cityList = favoriteOffers.map((offer) =>(offer.city.name));
+  const cityNames = Array.from(new Set(cityList));
+
+  const newArray = cityNames.map((city) => {
+    const places = favoriteOffers.filter((offer) => offer.city.name === city);
+    return {city, places};
+  });
+
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
@@ -12,32 +24,24 @@ function Favorites(): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href=" ">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <FavoritePlaceCard />
-                  <FavoritePlaceCard />
-                </div>
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href=" ">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <FavoritePlaceCard />
-                </div>
-              </li>
+              {
+                newArray.map((offer) =>
+                  (
+                    <li className="favorites__locations-items" key={offer.city}>
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <a className="locations__item-link" href=" ">
+                            <span>{offer.city}</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="favorites__places">
+                        <FavoritesListPlaces favoriteOffers={offer.places} />
+                      </div>
+                    </li>
+                  ),
+                )
+              }
             </ul>
           </section>
         </div>

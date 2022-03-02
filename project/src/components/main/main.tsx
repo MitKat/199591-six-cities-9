@@ -1,11 +1,13 @@
-import PlaceCard from './place-card/place-card';
 import MainHeader from '../main-header/main-header';
+import { Offer } from '../../mocks/offers';
+import PlaceCardList from '../place-card-list/place-card-list';
 
 type MainProps = {
   countOffer: number;
+  offers: Offer[];
 }
 
-function Main({countOffer}: MainProps): JSX.Element {
+function Main({countOffer, offers}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <MainHeader activeLogo />
@@ -68,11 +70,7 @@ function Main({countOffer}: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <PlaceCardList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
