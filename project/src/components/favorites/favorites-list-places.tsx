@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import PlaceCard from '../place-card/place-card';
+import FavoritePlaceCard from '../favorites/favorite-place-card';
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
 
 type FavoritesListPlacesProps = {
@@ -11,7 +11,7 @@ function FavoritesListPlaces({favoriteOffers}: FavoritesListPlacesProps): JSX.El
   return (
     <Fragment>
       {favoriteOffers.map((offer) => (
-        <PlaceCard key={offer.id} offerItem={offer} typeCard='Favorite' />
+        <FavoritePlaceCard key={offer.id} offerItem={offer} typeCard='Favorite' />
       )) }
     </Fragment>
   );
