@@ -37,7 +37,7 @@ function App({countOffer, offers, reviews, favoriteOffers}: AppProps): JSX.Eleme
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <Favorites favoriteOffers={favoriteOffers}/>
+              <Favorites favoriteOffers={favoriteOffers} />
             </PrivateRoute>
           }
         />

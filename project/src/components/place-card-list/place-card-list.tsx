@@ -4,14 +4,15 @@ import PlaceCard from '../place-card/place-card';
 
 type PlaceCardListProps = {
   offers: Offer[];
+  onListPlaceHover: (placeId: number) => void;
 }
 
-function PlaceCardList({offers}: PlaceCardListProps): JSX.Element {
+function PlaceCardList({offers, onListPlaceHover}: PlaceCardListProps): JSX.Element {
 
   return (
     <Fragment>
       {offers.map((offer) => (
-        <PlaceCard key={offer.id} offerItem={offer} typeCard='Normal' />
+        <PlaceCard key={offer.id} offerItem={offer} typeCard='Normal' onListPlaceHover={onListPlaceHover}/>
       )) }
     </Fragment>
   );

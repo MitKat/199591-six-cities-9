@@ -1,6 +1,8 @@
 import MainHeader from '../main-header/main-header';
 import { Offer } from '../../mocks/offers';
+import {useState} from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
+import Map from '../map/map';
 
 type MainProps = {
   countOffer: number;
@@ -8,6 +10,27 @@ type MainProps = {
 }
 
 function Main({countOffer, offers}: MainProps): JSX.Element {
+  const selectedCity = 'Amsterdam';
+
+  const selectedCityIndex = offers.findIndex((offer) => offer.city.name === selectedCity);
+  const cityLocation = offers[selectedCityIndex];
+
+  const offersInCity = offers.filter((offer) => offer.city.name === selectedCity);
+
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+
+  const onListPlaceHover = (placeId: number) => {
+    let currentPoint = undefined;
+
+    if (placeId !== -1) {
+      const currentIndex = offersInCity.findIndex((place) => place.id === placeId);
+      const {title} = offersInCity[currentIndex];
+      currentPoint = offersInCity.find((place) => place.title === title);
+    }
+
+    setSelectedPoint(currentPoint);
+  };
+
   return (
     <div className="page page--gray page--main">
       <MainHeader activeLogo />
@@ -70,11 +93,15 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList offers={offers} />
+                <PlaceCardList offers={offersInCity} onListPlaceHover={onListPlaceHover} />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                points={offersInCity}
+                city={cityLocation}
+                selectedPoint={selectedPoint}
+              />
             </div>
           </div>
         </div>

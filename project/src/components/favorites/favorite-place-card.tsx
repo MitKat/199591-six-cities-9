@@ -29,21 +29,18 @@ const nameCard = {
 type PlaceCardProps = {
   offerItem: Offer;
   typeCard: 'Favorite' | 'Normal';
-  onListPlaceHover: (placeId: number) => void;
 }
 
-function PlaceCard({offerItem, typeCard, onListPlaceHover}: PlaceCardProps): JSX.Element {
+function FavoritePlaceCard({offerItem, typeCard}: PlaceCardProps): JSX.Element {
   const className = nameCard[typeCard];
 
   const {price, title, previewImage, type, rating, id, isPremium, isFavorite} = offerItem;
 
   const mouseOverHandler = () => {
     setMouseOver(id);
-    onListPlaceHover(id);
   };
   const mouseOutHandler = () => {
     setMouseOver(-1);
-    onListPlaceHover(-1);
   };
 
   const [mouseOver, setMouseOver] = useState(-1);
@@ -89,4 +86,4 @@ function PlaceCard({offerItem, typeCard, onListPlaceHover}: PlaceCardProps): JSX
   );
 }
 
-export default PlaceCard;
+export default FavoritePlaceCard;
