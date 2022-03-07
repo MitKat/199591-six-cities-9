@@ -2,24 +2,22 @@ import { Fragment } from 'react';
 import { Offer } from '../../mocks/offers';
 import PlaceCard from '../place-card/place-card';
 
-type PlaceCardListProps = {
+type ListNearPlacesProps = {
   offers: Offer[];
-  onListPlaceHover?: (placeId: number) => void;
 }
 
-function PlaceCardList({offers, onListPlaceHover}: PlaceCardListProps): JSX.Element {
+function ListNearPlaces({offers}: ListNearPlacesProps): JSX.Element {
 
   return (
     <Fragment>
       {offers.map((offer) => (
         <PlaceCard key={offer.id}
           offerItem={offer}
-          typeCard='Normal'
-          onListPlaceHover={onListPlaceHover}
+          typeCard='Near'
         />
-      )) }
+      ))}
     </Fragment>
   );
 }
 
-export default PlaceCardList;
+export default ListNearPlaces;

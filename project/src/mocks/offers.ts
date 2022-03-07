@@ -1,11 +1,13 @@
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
 export type Offer = {
     bedrooms: number;
     city: {
-      location: {
-        latitude: number;
-        longitude: number;
-        zoom: number;
-      }
+      location: Location,
       name: string;
     }
     description: string;
@@ -20,11 +22,7 @@ export type Offer = {
     images: string[];
     isFavorite: boolean;
     isPremium: boolean;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    }
+    location: Location;
     maxAdults: number;
     previewImage: string;
     price: number;
@@ -37,7 +35,7 @@ export const offers: Offer[] = [
   {
     id: 1,
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
-    title: 'Beautiful &amp; luxurious studio at great location',
+    title: 'Beautiful studio at great location',
     type: 'Apartment',
     bedrooms: 4,
     goods: ['Heating', 'Wi-Fi', 'Baby seat', 'Cabel TV'],
@@ -65,7 +63,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10,
       },
-      name: 'Paris',
+      name: 'Amsterdam',
     },
   },
   {

@@ -1,8 +1,9 @@
 import MainHeader from '../main-header/main-header';
 import { Offer } from '../../mocks/offers';
-import {useState} from 'react';
+import { useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
+import { Cities } from '../../const';
 
 type MainProps = {
   countOffer: number;
@@ -11,7 +12,6 @@ type MainProps = {
 
 function Main({countOffer, offers}: MainProps): JSX.Element {
   const selectedCity = 'Amsterdam';
-
   const selectedCityIndex = offers.findIndex((offer) => offer.city.name === selectedCity);
   const cityLocation = offers[selectedCityIndex];
 
@@ -20,7 +20,7 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
 
   const onListPlaceHover = (placeId: number) => {
-    let currentPoint = undefined;
+    let currentPoint;
 
     if (placeId !== -1) {
       const currentIndex = offersInCity.findIndex((place) => place.id === placeId);
@@ -39,36 +39,13 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href=" ">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href=" ">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href=" ">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href=" ">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href=" ">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href=" ">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {Cities.map((cityItem) => (
+                <li className="locations__item" key={cityItem}>
+                  <a className="locations__item-link tabs__item" href=" ">
+                    <span>{cityItem}</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </section>
         </div>
@@ -76,7 +53,7 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{countOffer} places to stay in Amsterdam</b>
+              <b className="places__found">{countOffer} places to stay in {selectedCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex = {0}>
@@ -93,13 +70,16 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardList offers={offersInCity} onListPlaceHover={onListPlaceHover} />
+                <PlaceCardList
+                  offers={offersInCity}
+                  onListPlaceHover={onListPlaceHover}
+                />
               </div>
             </section>
             <div className="cities__right-section">
               <Map
                 points={offersInCity}
-                city={cityLocation}
+                location={cityLocation.city.location}
                 selectedPoint={selectedPoint}
               />
             </div>

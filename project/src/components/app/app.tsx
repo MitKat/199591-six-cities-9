@@ -3,10 +3,10 @@ import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import NotFound from '../not-found/not-found';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import {Offer} from '../../mocks/offers';
+import { Offer } from '../../mocks/offers';
 import { Review } from '../../mocks/reviews';
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
 

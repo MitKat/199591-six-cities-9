@@ -1,6 +1,15 @@
+import { Offer } from './mocks/offers';
+
 const PERC_STAR = 20;
 
-export default function getPercRating(rating: number) {
+export function getPercRating(rating: number) {
   return Math.round(rating)*PERC_STAR;
+}
+
+export function getListCity(offers: Offer[]) {
+  const allCities = offers.map((offer) =>(offer.city.name));
+  const listCity = Array.from(new Set(allCities));
+
+  return listCity;
 }
 

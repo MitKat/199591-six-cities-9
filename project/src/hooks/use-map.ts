@@ -1,20 +1,20 @@
 import { MutableRefObject, useEffect, useState } from 'react';
-import {Map, TileLayer} from 'leaflet';
-import { Offer } from '../mocks/offers';
+import { Map, TileLayer } from 'leaflet';
+import { Location } from '../mocks/offers';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: Offer) : Map | null {
+  location: Location) : Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.location.latitude,
-          lng: city.location.longitude,
+          lat: location.latitude,
+          lng: location.longitude,
         },
-        zoom: city.location.zoom,
+        zoom: location.zoom,
       });
 
       const layer = new TileLayer(
@@ -28,7 +28,7 @@ function useMap(
 
       setMap(instance);
     }
-  }, [mapRef, map, city]);
+  }, [mapRef, map, location]);
 
   return map;
 }

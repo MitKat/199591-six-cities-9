@@ -1,8 +1,9 @@
-import {Offer} from '../../mocks/offers';
-import {useState} from 'react';
-import { Link } from 'react-router-dom';
-import getPercRating from '../../utils';
+import { Offer } from '../../mocks/offers';
+import { useState } from 'react';
+import { generatePath, Link } from 'react-router-dom';
+import { getPercRating } from '../../utils';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
+import { AppRoute } from '../../const';
 
 
 const nameCard = {
@@ -24,55 +25,68 @@ const nameCard = {
     },
     cardInfo: 'place-card__info',
   },
+  Near: {
+    articleContainer: 'near-places__card place-card',
+    imageWrapper: {
+      name: 'near-places__image-wrapper place-card__image-wrapper',
+      sizeWidth: '260',
+      sizeHeight: '200',
+    },
+    cardInfo: 'place-card__info',
+  },
 };
 
 type PlaceCardProps = {
   offerItem: Offer;
-  typeCard: 'Favorite' | 'Normal';
-  onListPlaceHover: (placeId: number) => void;
+  typeCard: 'Favorite' | 'Normal' | 'Near';
+  onListPlaceHover?: (placeId: number) => void;
 }
 
 function PlaceCard({offerItem, typeCard, onListPlaceHover}: PlaceCardProps): JSX.Element {
-  const className = nameCard[typeCard];
+  const attributeCard = nameCard[typeCard];
 
   const {price, title, previewImage, type, rating, id, isPremium, isFavorite} = offerItem;
 
   const mouseOverHandler = () => {
     setMouseOver(id);
-    onListPlaceHover(id);
+    if (onListPlaceHover) {
+      onListPlaceHover(id);
+    }
   };
   const mouseOutHandler = () => {
     setMouseOver(-1);
-    onListPlaceHover(-1);
+    if (onListPlaceHover) {
+      onListPlaceHover(-1);
+    }
   };
 
   const [mouseOver, setMouseOver] = useState(-1);
 
   return (
-    <article className={className.articleContainer} onMouseOver={mouseOverHandler} onMouseOut={mouseOutHandler}>
+    <article className={attributeCard.articleContainer} onMouseOver={mouseOverHandler} onMouseOut={mouseOutHandler}>
       {
-        (isPremium) &&
+        isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       }
-      <div className={className.imageWrapper.name}>
-        <Link to={`/offer/${String(mouseOver)}`}>
+      <div className={attributeCard.imageWrapper.name}>
+        <Link to={generatePath(AppRoute.Room, {id: String(mouseOver)})}>
           <img className="place-card__image"
             src={previewImage}
-            width={className.imageWrapper.sizeWidth}
-            height={className.imageWrapper.sizeHeight}
+            width={attributeCard.imageWrapper.sizeWidth}
+            height={attributeCard.imageWrapper.sizeHeight}
             alt="Place"
           />
         </Link>
       </div>
-      <div className={className.cardInfo}>
+      <div className={attributeCard.cardInfo}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <ButtonFavoriteMark isFavorite={isFavorite} />
+          <ButtonFavoriteMark isFavorite={isFavorite} size='Small' typeMark='Place' />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -81,7 +95,7 @@ function PlaceCard({offerItem, typeCard, onListPlaceHover}: PlaceCardProps): JSX
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${String(mouseOver)}`}>{title}</Link>
+          <Link to={generatePath(AppRoute.Room, {id: String(mouseOver)})}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

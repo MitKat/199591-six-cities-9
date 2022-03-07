@@ -23,7 +23,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [ANCHOR_MARKER, HEIGHT_MARKER],
 });
 
-function Map({points, location, selectedPoint}: MapProps) {
+function MapRoom({points, location, selectedPoint}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
 
@@ -46,10 +46,10 @@ function Map({points, location, selectedPoint}: MapProps) {
   }, [map, points, selectedPoint]);
 
   return(
-    <section className="cities__map map" ref={mapRef}>
+    <section className="property__map map" ref={mapRef}>
 
     </section>
   );
 }
 
-export default Map;
+export default MapRoom;
