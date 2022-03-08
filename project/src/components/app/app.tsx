@@ -9,6 +9,7 @@ import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../mocks/offers';
 import { Review } from '../../mocks/reviews';
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
+import ScrollToTop from '../../utils';
 
 type AppProps = {
   countOffer: number;
@@ -21,6 +22,7 @@ function App({countOffer, offers, reviews, favoriteOffers}: AppProps): JSX.Eleme
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route
           path={AppRoute.Main}

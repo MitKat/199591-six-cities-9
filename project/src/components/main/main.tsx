@@ -3,7 +3,7 @@ import { Offer } from '../../mocks/offers';
 import { useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
-import { Cities } from '../../const';
+import { CITIES } from '../../const';
 
 type MainProps = {
   countOffer: number;
@@ -11,7 +11,7 @@ type MainProps = {
 }
 
 function Main({countOffer, offers}: MainProps): JSX.Element {
-  const selectedCity = 'Amsterdam';
+  const selectedCity = CITIES[3];
   const selectedCityIndex = offers.findIndex((offer) => offer.city.name === selectedCity);
   const cityLocation = offers[selectedCityIndex];
 
@@ -39,11 +39,16 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {Cities.map((cityItem) => (
+              {CITIES.map((cityItem) => (
                 <li className="locations__item" key={cityItem}>
-                  <a className="locations__item-link tabs__item" href=" ">
-                    <span>{cityItem}</span>
-                  </a>
+                  {(selectedCity === cityItem) ?
+                    <a className="locations__item-link tabs__item tabs__item--active" href=" ">
+                      <span>{cityItem}</span>
+                    </a>
+                    :
+                    <a className="locations__item-link tabs__item " href=" ">
+                      <span>{cityItem}</span>
+                    </a>}
                 </li>
               ))}
             </ul>
@@ -81,6 +86,7 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
                 points={offersInCity}
                 location={cityLocation.city.location}
                 selectedPoint={selectedPoint}
+                typePage='MainPage'
               />
             </div>
           </div>

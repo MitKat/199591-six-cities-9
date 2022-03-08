@@ -7,7 +7,7 @@ import HostUser from './host-user';
 import FormNewComment from '../form-new-comment/form-new-comment';
 import { useParams } from 'react-router-dom';
 import ListNearPlaces from './list-near-places';
-import MapRoom from '../map/map-room';
+import Map from '../map/map';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 
 
@@ -17,10 +17,9 @@ type RoomProps = {
 }
 
 function Room({offers, reviews}: RoomProps): JSX.Element {
-
   const {id} = useParams();
-
   const index = offers.findIndex((offer) => String(offer.id) === id);
+
   const {title, images, rating, city, type, bedrooms, maxAdults, description, price, goods, isPremium, isFavorite} = offers[index];
   return (
     <div className="page">
@@ -99,10 +98,11 @@ function Room({offers, reviews}: RoomProps): JSX.Element {
               </section>
             </div>
           </div>
-          <MapRoom
+          <Map
             points={offers}
             location={city.location}
             selectedPoint={offers[index]}
+            typePage='PropertyPage'
           />
         </section>
         <div className="container">

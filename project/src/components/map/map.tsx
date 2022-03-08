@@ -6,11 +6,18 @@ import useMap from '../../hooks/use-map';
 import { useEffect } from 'react';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, WIDTH_MARKER, HEIGHT_MARKER, ANCHOR_MARKER } from '../../const';
 
+export enum MapContainer {
+  MainPage = 'cities__map map',
+  PropertyPage = 'property__map map',
+}
+
 type MapProps = {
   points: Offer[];
   location: Location;
   selectedPoint: Offer | undefined;
+  typePage: 'MainPage' | 'PropertyPage';
 }
+
 const defaultCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [WIDTH_MARKER, HEIGHT_MARKER],
@@ -23,9 +30,11 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [ANCHOR_MARKER, HEIGHT_MARKER],
 });
 
-function Map({points, location, selectedPoint}: MapProps) {
+function Map({typePage, points, location, selectedPoint}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
+
+  const classNameMap = MapContainer[typePage];
 
   useEffect(() => {
     if (map) {
@@ -45,9 +54,8 @@ function Map({points, location, selectedPoint}: MapProps) {
     }
   }, [map, points, selectedPoint]);
 
-  return(
-    <section className="cities__map map" ref={mapRef}>
-
+  return (
+    <section className={classNameMap} ref={mapRef}>
     </section>
   );
 }
