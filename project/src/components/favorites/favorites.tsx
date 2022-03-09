@@ -1,4 +1,5 @@
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
+import { getListCity } from '../../utils';
 import Logo from '../logo/logo';
 import MainHeader from '../main-header/main-header';
 import FavoritesListPlaces from './favorites-list-places';
@@ -8,10 +9,9 @@ type FavoritesProps = {
 }
 
 function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
-  const cityList = favoriteOffers.map((offer) =>(offer.city.name));
-  const cityNames = Array.from(new Set(cityList));
+  const listCity = getListCity(favoriteOffers);
 
-  const favoritesPlacesInCity = cityNames.map((city) => {
+  const favoritesPlacesInCity = listCity.map((city) => {
     const places = favoriteOffers.filter((offer) => offer.city.name === city);
     return {city, places};
   });

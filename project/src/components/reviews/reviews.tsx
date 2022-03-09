@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import dayjs from 'dayjs';
 import { Review } from '../../mocks/reviews';
-import getPercRating from '../../utils';
+import { getPercRating } from '../../utils';
 
 type ReviewsProps = {
   reviews: Review[];
