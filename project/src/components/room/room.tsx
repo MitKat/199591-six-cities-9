@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import ListNearPlaces from './list-near-places';
 import Map from '../map/map';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
+import useScrollTop from '../../hooks/use-scroll-top';
 
 
 type RoomProps = {
@@ -17,6 +18,7 @@ type RoomProps = {
 }
 
 function Room({offers, reviews}: RoomProps): JSX.Element {
+  useScrollTop();
   const {id} = useParams();
   const index = offers.findIndex((offer) => String(offer.id) === id);
 
