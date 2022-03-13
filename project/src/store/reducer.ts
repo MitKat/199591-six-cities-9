@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-// import { CITIES } from '../const';
 import { changeCity } from './action';
 
 const initialState = {
@@ -9,7 +8,7 @@ const initialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
-      state.index = action.payload.index;
+      state.index = action.payload;
     });
 });
 
