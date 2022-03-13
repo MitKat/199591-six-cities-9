@@ -1,9 +1,11 @@
 import MainHeader from '../main-header/main-header';
 import { Offer } from '../../mocks/offers';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
 import { CITIES } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { changeCity } from '../../store/action';
 
 type MainProps = {
   countOffer: number;
@@ -11,7 +13,11 @@ type MainProps = {
 }
 
 function Main({countOffer, offers}: MainProps): JSX.Element {
-  const selectedCity = CITIES[3];
+
+  const change = useAppSelector((state) => state.index);
+  const dispatch = useAppDispatch();
+  const selectedCity = CITIES[change];
+
   const selectedCityIndex = offers.findIndex((offer) => offer.city.name === selectedCity);
   const cityLocation = offers[selectedCityIndex];
 
@@ -31,6 +37,11 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
     setSelectedPoint(currentPoint);
   };
 
+  const changeCityHandle = (evt: ChangeEvent<HTMLLIElement>) => {
+
+    dispatch(changeCity(evt.target.value));
+  };
+
   return (
     <div className="page page--gray page--main">
       <MainHeader activeLogo />
@@ -39,10 +50,17 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {CITIES.map((cityItem) => (
-                <li className="locations__item" key={cityItem}>
+              {CITIES.map((cityItem, index) => (
+                <li className="locations__item"
+                  key={cityItem}
+                  onChange={changeCityHandle}
+                  value={index}
+                >
                   {(selectedCity === cityItem) ?
-                    <a className="locations__item-link tabs__item tabs__item--active" href=" ">
+                    <a className="locations__item-link tabs__item tabs__item--active"
+
+                      href=" "
+                    >
                       <span>{cityItem}</span>
                     </a>
                     :
