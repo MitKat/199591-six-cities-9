@@ -117,8 +117,8 @@ export const offers: Offer[] = [
       name: 'Angelina',
     },
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
+      latitude: 48.8909553943508,
+      longitude: 2.359309666406198,
       zoom: 10,
     },
     maxAdults: 14,
@@ -127,11 +127,11 @@ export const offers: Offer[] = [
     rating: 5,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.85341,
+        longitude: 2.3488,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     },
   },
   {
