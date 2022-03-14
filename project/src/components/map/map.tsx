@@ -51,8 +51,9 @@ function Map({typePage, points, location, selectedPoint}: MapProps) {
           )
           .addTo(map);
       });
+      map.setView([location.latitude, location.longitude], location.zoom);
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPoint, location]);
 
   return (
     <section className={classNameMap} ref={mapRef}>

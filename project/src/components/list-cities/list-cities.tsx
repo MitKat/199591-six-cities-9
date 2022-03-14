@@ -20,16 +20,13 @@ function ListCities({indexCity}: ListProps): JSX.Element {
               onClick={() => dispatch(changeCity(item))}
             >
               {(selectedCity === cityItem) ?
-                <a className="locations__item-link tabs__item tabs__item--active"
-
-                  href=" "
-                >
+                <div className="locations__item-link tabs__item tabs__item--active">
                   <span>{cityItem}</span>
-                </a>
+                </div>
                 :
-                <a className="locations__item-link tabs__item " href=" ">
+                <div className="locations__item-link tabs__item ">
                   <span>{cityItem}</span>
-                </a>}
+                </div>}
             </li>
           ))}
         </ul>
