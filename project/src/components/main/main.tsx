@@ -3,11 +3,12 @@ import { Offer } from '../../mocks/offers';
 import { useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
-import { CITIES } from '../../const';
+import { CITIES, Sort, SORT_TYPE } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 
 import ListCities from '../list-cities/list-cities';
 import EmptyPlaceCardList from '../empty-place-card-list/empty-place-card-list';
+import FormSortPlaces from '../sort-places/sort-places';
 
 type MainProps = {
   countOffer: number;
@@ -15,17 +16,28 @@ type MainProps = {
 }
 
 function Main({countOffer, offers}: MainProps): JSX.Element {
-
-  const {index} = useAppSelector((state) => state);
+  const {index, indexSort} = useAppSelector((state) => state);
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
 
   const selectedCity = CITIES[index];
+  const currentSort = SORT_TYPE[indexSort];
 
   const selectedCityIndex = offers.findIndex((offer) => offer.city.name === selectedCity);
   const cityLocation = offers[selectedCityIndex];
 
-  const offersInCity = offers.filter((offer) => offer.city.name === selectedCity);
+  const offersInCity= offers.filter((offer) => offer.city.name === selectedCity);
 
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+  switch (currentSort) {
+    case Sort.PriceUp:
+      offersInCity.sort((offerA, offerB) => (offerA.price - offerB.price));
+      break;
+    case Sort.PriceDown:
+      offersInCity.sort((offerA, offerB) => (offerB.price - offerA.price));
+      break;
+    case Sort.Rating:
+      offersInCity.sort((offerA, offerB) => (offerB.rating - offerA.rating));
+      break;
+  }
 
   const onListPlaceHover = (placeId: number) => {
     let currentPoint;
@@ -47,27 +59,13 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
         <ListCities indexCity={index} />
         <div className="cities">
           { (offersInCity.length === 0) ?
-            <EmptyPlaceCardList />
+            <EmptyPlaceCardList city={selectedCity} />
             :
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{countOffer} places to stay in {selectedCity}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex = {0}>
-                Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex = {0}>Popular</li>
-                    <li className="places__option" tabIndex = {0}>Price: low to high</li>
-                    <li className="places__option" tabIndex = {0}>Price: high to low</li>
-                    <li className="places__option" tabIndex = {0}>Top rated first</li>
-                  </ul>
-                </form>
+                <FormSortPlaces currentSort={currentSort} indexSort={indexSort} />
                 <div className="cities__places-list places__list tabs__content">
                   <PlaceCardList
                     offers={offersInCity}
