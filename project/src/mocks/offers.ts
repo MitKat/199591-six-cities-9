@@ -90,7 +90,7 @@ export const offers: Offer[] = [
     maxAdults: 6,
     previewImage: 'img/apartment-02.jpg',
     price: 520,
-    rating: 3,
+    rating: 1,
     city: {
       location: {
         latitude: 52.370216,

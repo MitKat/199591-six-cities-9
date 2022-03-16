@@ -27,3 +27,10 @@ export const CITIES = [
   'Dusseldorf',
 ];
 
+export enum TypeSort {
+  Popular = 'Popular',
+  PriceUp = 'Price: low to high',
+  PriceDown = 'Price: high to low',
+  Rating = 'Top rated first',
+}
+
