@@ -3,7 +3,7 @@ import { Offer } from '../../mocks/offers';
 import { useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
-import { CITIES, Sort, SORT_TYPE } from '../../const';
+import { TypeSort } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 
 import ListCities from '../list-cities/list-cities';
@@ -16,26 +16,23 @@ type MainProps = {
 }
 
 function Main({countOffer, offers}: MainProps): JSX.Element {
-  const {index, indexSort} = useAppSelector((state) => state);
+  const {selectedCity, currentSort} = useAppSelector((state) => state);
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-
-  const selectedCity = CITIES[index];
-  const currentSort = SORT_TYPE[indexSort];
 
   const selectedCityIndex = offers.findIndex((offer) => offer.city.name === selectedCity);
   const cityLocation = offers[selectedCityIndex];
 
-  const offersInCity= offers.filter((offer) => offer.city.name === selectedCity);
+  let offersInCity= offers.filter((offer) => offer.city.name === selectedCity);
 
   switch (currentSort) {
-    case Sort.PriceUp:
-      offersInCity.sort((offerA, offerB) => (offerA.price - offerB.price));
+    case TypeSort.PriceUp:
+      offersInCity = [...offersInCity].sort((offerA, offerB) => (offerA.price - offerB.price));
       break;
-    case Sort.PriceDown:
-      offersInCity.sort((offerA, offerB) => (offerB.price - offerA.price));
+    case TypeSort.PriceDown:
+      offersInCity = [...offersInCity].sort((offerA, offerB) => (offerB.price - offerA.price));
       break;
-    case Sort.Rating:
-      offersInCity.sort((offerA, offerB) => (offerB.rating - offerA.rating));
+    case TypeSort.Rating:
+      offersInCity = [...offersInCity].sort((offerA, offerB) => (offerB.rating - offerA.rating));
       break;
   }
 
@@ -56,7 +53,7 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
       <MainHeader activeLogo />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <ListCities indexCity={index} />
+        <ListCities selectedCity={selectedCity} />
         <div className="cities">
           { (offersInCity.length === 0) ?
             <EmptyPlaceCardList city={selectedCity} />
@@ -65,7 +62,7 @@ function Main({countOffer, offers}: MainProps): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{countOffer} places to stay in {selectedCity}</b>
-                <FormSortPlaces currentSort={currentSort} indexSort={indexSort} />
+                <FormSortPlaces currentSort={currentSort} />
                 <div className="cities__places-list places__list tabs__content">
                   <PlaceCardList
                     offers={offersInCity}

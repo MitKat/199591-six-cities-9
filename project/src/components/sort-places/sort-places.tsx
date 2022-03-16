@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { SORT_TYPE } from '../../const';
+import { TypeSort } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { sortPlaces } from '../../store/action';
 
 type SortPlacesProps = {
   currentSort: string;
-  indexSort: number;
 }
 
-function SortPlaces({currentSort, indexSort}: SortPlacesProps): JSX.Element {
+function SortPlaces({currentSort}: SortPlacesProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [isOpenOptions, setIsOpenOptions] = useState(false);
 
@@ -18,7 +17,7 @@ function SortPlaces({currentSort, indexSort}: SortPlacesProps): JSX.Element {
     >
       <span className="places__sorting-caption">Sort by</span>
 
-      <span className="places__sorting-type" tabIndex = {indexSort} >
+      <span className="places__sorting-type">
         {currentSort}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -27,22 +26,16 @@ function SortPlaces({currentSort, indexSort}: SortPlacesProps): JSX.Element {
       {
         isOpenOptions &&
         <ul className="places__options places__options--custom places__options--opened">
-          {SORT_TYPE.map((name, index) => (
-            (currentSort === name) ?
-              <li className="places__option places__option--active"
-                tabIndex = {index} key={name}
-              >
-                {name}
-              </li>
-              :
-              <li className="places__option"
+          {Object.values(TypeSort).map((name, index) =>
+            (
+              <li className={`places__option ${(currentSort === name)? 'places__option--active' : ' '}`}
                 tabIndex = {index}
                 key={name}
-                onClick={() => dispatch(sortPlaces(index))}
+                onClick={() => dispatch(sortPlaces(name))}
               >
                 {name}
               </li>
-          ))}
+            ))}
         </ul>
       }
     </form>
