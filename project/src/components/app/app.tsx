@@ -6,25 +6,26 @@ import NotFound from '../not-found/not-found';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import { Offer } from '../../mocks/offers';
 import { Review } from '../../mocks/reviews';
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
+import { useAppSelector } from '../../hooks';
+
 
 type AppProps = {
-  countOffer: number;
-  offers: Offer[];
   reviews: Review[];
   favoriteOffers: FavoriteOffer[];
 }
 
-function App({countOffer, offers, reviews, favoriteOffers}: AppProps): JSX.Element {
+function App({reviews, favoriteOffers}: AppProps): JSX.Element {
+
+  const {offers} = useAppSelector((state) => state);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main countOffer={countOffer} offers={offers}/>}
+          element={<Main offers={offers}/>}
         />
         <Route path={AppRoute.Room}
           element={
