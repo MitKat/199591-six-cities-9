@@ -1,19 +1,25 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CITIES, TypeSort } from '../const';
-import { changeCity, sortPlaces } from './action';
+import { changeCity, loadOffers, sortPlaces } from './action';
 
 const initialState = {
-  selectedCity: CITIES[0],
+  currentCity: CITIES[0],
   currentSort: TypeSort.Popular,
+  isDataLoaded: false,
+  offers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
-      state.selectedCity = action.payload;
+      state.currentCity = action.payload;
     })
     .addCase(sortPlaces, (state, action) => {
       state.currentSort = action.payload;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+      state.isDataLoaded = true;
     });
 });
 
