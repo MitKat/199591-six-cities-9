@@ -1,5 +1,5 @@
 import MainHeader from '../main-header/main-header';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 import { useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';

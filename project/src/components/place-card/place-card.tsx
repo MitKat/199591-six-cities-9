@@ -1,4 +1,4 @@
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 import { useState } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { getPercRating } from '../../utils';

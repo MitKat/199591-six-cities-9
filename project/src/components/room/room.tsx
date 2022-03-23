@@ -1,4 +1,4 @@
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 import { Review } from '../../mocks/reviews';
 import MainHeader from '../main-header/main-header';
 import Reviews from '../reviews/reviews';
@@ -10,6 +10,8 @@ import ListNearPlaces from './list-near-places';
 import Map from '../map/map';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import useScrollTop from '../../hooks/use-scroll-top';
+import { AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 
 type RoomProps = {
@@ -18,6 +20,7 @@ type RoomProps = {
 }
 
 function Room({offers, reviews}: RoomProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   useScrollTop();
   const {id} = useParams();
   const index = offers.findIndex((offer) => String(offer.id) === id);
@@ -96,7 +99,7 @@ function Room({offers, reviews}: RoomProps): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <Reviews reviews={reviews} />
-                <FormNewComment />
+                {(authorizationStatus === AuthorizationStatus.Auth) && <FormNewComment />}
               </section>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { CITIES } from '../../const';
 import { useAppDispatch} from '../../hooks/index';
 import { changeCity } from '../../store/action';
@@ -18,9 +19,9 @@ function ListCities({selectedCity}: ListProps): JSX.Element {
               key={cityItem}
               onClick={() => dispatch(changeCity(cityItem))}
             >
-              <div className={`locations__item-link tabs__item ${(selectedCity === cityItem)? 'tabs__item--active' : ' '}`}>
+              <Link to='/' className={`locations__item-link tabs__item ${(selectedCity === cityItem)? 'tabs__item--active' : ' '}`}>
                 <span>{cityItem}</span>
-              </div>
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
-import { Location, Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
+import { Location } from '../../types/location';
 import { useRef } from 'react';
 import leaflet, { Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';

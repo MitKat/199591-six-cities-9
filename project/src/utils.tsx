@@ -1,4 +1,4 @@
-import { Offer } from './mocks/offers';
+import { Offer } from './types/offer';
 
 const PERC_STAR = 20;
 

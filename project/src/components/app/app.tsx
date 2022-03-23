@@ -3,12 +3,14 @@ import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import NotFound from '../not-found/not-found';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { Route, Routes } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import { Review } from '../../mocks/reviews';
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
 import { useAppSelector } from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 
 type AppProps = {
@@ -18,10 +20,11 @@ type AppProps = {
 
 function App({reviews, favoriteOffers}: AppProps): JSX.Element {
 
-  const {offers} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offers= useAppSelector((state) => state.offers);
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -36,7 +39,7 @@ function App({reviews, favoriteOffers}: AppProps): JSX.Element {
         <Route path={AppRoute.Favorites}
           element= {
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <Favorites favoriteOffers={favoriteOffers} />
             </PrivateRoute>
@@ -44,7 +47,8 @@ function App({reviews, favoriteOffers}: AppProps): JSX.Element {
         />
         <Route path={AppRoute.NotFound} element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+
+    </HistoryRouter>
   );
 }
 
