@@ -16,7 +16,6 @@ export const fetchOffersAction = createAsyncThunk(
     } catch (error) {
       errorHandle(error);
     }
-
   },
 );
 

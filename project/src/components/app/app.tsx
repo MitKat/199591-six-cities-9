@@ -20,7 +20,6 @@ type AppProps = {
 
 function App({reviews, favoriteOffers}: AppProps): JSX.Element {
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offers= useAppSelector((state) => state.offers);
 
   return (
@@ -39,7 +38,7 @@ function App({reviews, favoriteOffers}: AppProps): JSX.Element {
         <Route path={AppRoute.Favorites}
           element= {
             <PrivateRoute
-              authorizationStatus={authorizationStatus}
+              authorizationStatus={useAppSelector((state) => state.authorizationStatus)}
             >
               <Favorites favoriteOffers={favoriteOffers} />
             </PrivateRoute>

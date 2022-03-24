@@ -9,4 +9,6 @@ export const loadOffers = createAction('data/loadOffers', (payload: []) => ({pay
 
 export const requireAuthorization = createAction('user/Authorization', (payload: AuthorizationStatus) => ({payload}));
 
+export const getUserData = createAction('user/userData', (payload: string) => ({payload}));
+
 export const redirectToRoute = createAction('main/redirectToRoute', (payload: string) => ({payload}));

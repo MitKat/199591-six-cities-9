@@ -11,6 +11,7 @@ type MainHeaderProps = {
 
 function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const isActive = activeLogo;
@@ -31,7 +32,7 @@ function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__user-name user__name">{user.email}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
