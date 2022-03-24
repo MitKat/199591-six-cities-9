@@ -22,6 +22,7 @@ export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments/{hotelId}',
 }
 
 export const WIDTH_MARKER = 40;

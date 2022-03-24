@@ -1,5 +1,4 @@
 import { Offer } from '../../types/offer';
-import { Review } from '../../mocks/reviews';
 import MainHeader from '../main-header/main-header';
 import Reviews from '../reviews/reviews';
 import { getPercRating } from '../../utils';
@@ -12,15 +11,18 @@ import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import useScrollTop from '../../hooks/use-scroll-top';
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchReviewsAction } from '../../store/api-actions';
 
 
 type RoomProps = {
   offers: Offer[];
-  reviews: Review[];
 }
 
-function Room({offers, reviews}: RoomProps): JSX.Element {
+function Room({offers}: RoomProps): JSX.Element {
+  store.dispatch(fetchReviewsAction());
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const reviews = useAppSelector((state) => state.reviews);
   useScrollTop();
   const {id} = useParams();
   const index = offers.findIndex((offer) => String(offer.id) === id);

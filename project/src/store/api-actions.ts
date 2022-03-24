@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { loadOffers, redirectToRoute, requireAuthorization } from './action';
+import { loadOffers, loadReviews, redirectToRoute, requireAuthorization } from './action';
 import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
@@ -13,6 +13,18 @@ export const fetchOffersAction = createAsyncThunk(
     try {
       const {data} = await api.get(APIRoute.Hotels);
       store.dispatch(loadOffers(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk(
+  'data/fetchReviews',
+  async () => {
+    try {
+      const {data} = await api.get(APIRoute.Reviews);
+      store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
     }

@@ -7,6 +7,8 @@ export const sortPlaces = createAction('main/sortPlaces', (payload: TypeSort) =>
 
 export const loadOffers = createAction('data/loadOffers', (payload: []) => ({payload}));
 
+export const loadReviews = createAction('data/loadReviews', (payload: []) => ({payload}));
+
 export const requireAuthorization = createAction('user/Authorization', (payload: AuthorizationStatus) => ({payload}));
 
 export const getUserData = createAction('user/userData', (payload: string) => ({payload}));

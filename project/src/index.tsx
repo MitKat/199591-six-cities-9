@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import { reviews } from './mocks/reviews';
 import { favoriteOffers } from './mocks/favoriteOffers';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -17,7 +16,6 @@ ReactDOM.render(
     <Provider store={store}>
       <ToastContainer />
       <App
-        reviews = {reviews}
         favoriteOffers = {favoriteOffers}
       />
     </Provider>

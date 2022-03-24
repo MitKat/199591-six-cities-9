@@ -6,7 +6,6 @@ import NotFound from '../not-found/not-found';
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import { Review } from '../../mocks/reviews';
 import { FavoriteOffer } from '../../mocks/favoriteOffers';
 import { useAppSelector } from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
@@ -14,11 +13,10 @@ import browserHistory from '../../browser-history';
 
 
 type AppProps = {
-  reviews: Review[];
   favoriteOffers: FavoriteOffer[];
 }
 
-function App({reviews, favoriteOffers}: AppProps): JSX.Element {
+function App({favoriteOffers}: AppProps): JSX.Element {
 
   const offers= useAppSelector((state) => state.offers);
 
@@ -31,7 +29,7 @@ function App({reviews, favoriteOffers}: AppProps): JSX.Element {
         />
         <Route path={AppRoute.Room}
           element={
-            <Room offers={offers} reviews={reviews}/>
+            <Room offers={offers}/>
           }
         />
         <Route path={AppRoute.SignIn} element={<SignIn />} />
