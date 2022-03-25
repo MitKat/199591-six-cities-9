@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { loadOffers, loadReviews, redirectToRoute, requireAuthorization } from './action';
+import { loadHotel, loadHotelsNearby, loadOffers, loadReviews, redirectToRoute, requireAuthorization, saveUserData } from './action';
 import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
@@ -19,11 +19,35 @@ export const fetchOffersAction = createAsyncThunk(
   },
 );
 
+export const fetchHotelAction = createAsyncThunk(
+  'data/fetchHotel',
+  async (id: string) => {
+    try {
+      const {data} = await api.get(`${APIRoute.Hotels}/${id}`);
+      store.dispatch(loadHotel(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchHotelsNearbyAction = createAsyncThunk(
+  'data/fetchHotelsNearby',
+  async (id: string) => {
+    try {
+      const {data} = await api.get(`${APIRoute.Hotels}/${id}/nearby`);
+      store.dispatch(loadHotelsNearby(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
 export const fetchReviewsAction = createAsyncThunk(
   'data/fetchReviews',
-  async () => {
+  async (id: string) => {
     try {
-      const {data} = await api.get(APIRoute.Reviews);
+      const {data} = await api.get(`${APIRoute.Reviews}/${id}`);
       store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
@@ -35,7 +59,8 @@ export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const response = await api.get(APIRoute.Login);
+      store.dispatch(saveUserData(response.data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       errorHandle(error);

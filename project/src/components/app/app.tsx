@@ -27,17 +27,14 @@ function App({favoriteOffers}: AppProps): JSX.Element {
           path={AppRoute.Main}
           element={<Main offers={offers}/>}
         />
-        <Route path={AppRoute.Room}
-          element={
-            <Room offers={offers}/>
-          }
+        <Route
+          path={AppRoute.Room}
+          element={<Room/>}
         />
         <Route path={AppRoute.SignIn} element={<SignIn />} />
         <Route path={AppRoute.Favorites}
           element= {
-            <PrivateRoute
-              authorizationStatus={useAppSelector((state) => state.authorizationStatus)}
-            >
+            <PrivateRoute>
               <Favorites favoriteOffers={favoriteOffers} />
             </PrivateRoute>
           }
