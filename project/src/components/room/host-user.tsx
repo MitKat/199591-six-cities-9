@@ -1,4 +1,4 @@
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 
 enum ClassNameHostUser {
   Pro = 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper',

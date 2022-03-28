@@ -1,5 +1,3 @@
-import { Offer } from '../../mocks/offers';
-import { Review } from '../../mocks/reviews';
 import MainHeader from '../main-header/main-header';
 import Reviews from '../reviews/reviews';
 import { getPercRating } from '../../utils';
@@ -10,19 +8,31 @@ import ListNearPlaces from './list-near-places';
 import Map from '../map/map';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import useScrollTop from '../../hooks/use-scroll-top';
+import { AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchHotelAction, fetchHotelsNearbyAction, fetchReviewsAction } from '../../store/api-actions';
 
 
-type RoomProps = {
-  offers: Offer[];
-  reviews: Review[];
-}
+import { useEffect } from 'react';
 
-function Room({offers, reviews}: RoomProps): JSX.Element {
-  useScrollTop();
+function Room(): JSX.Element {
   const {id} = useParams();
-  const index = offers.findIndex((offer) => String(offer.id) === id);
+  const dispatch = useAppDispatch();
 
-  const {title, images, rating, city, type, bedrooms, maxAdults, description, price, goods, isPremium, isFavorite} = offers[index];
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const reviews = useAppSelector((state) => state.reviews);
+  const hotel = useAppSelector((state) => state.hotel);
+  const hotelsNearby = useAppSelector((state) => state.hotelsNearby);
+
+  useScrollTop();
+
+  useEffect(() => {
+    dispatch(fetchHotelAction(String(id)));
+    dispatch(fetchReviewsAction(String(id)));
+    dispatch(fetchHotelsNearbyAction(String(id)));
+  }, [id, dispatch]);
+
+  const {title, images, rating, city,  type, bedrooms, maxAdults, description, price, goods, isPremium, isFavorite} = hotel;
   return (
     <div className="page">
       <MainHeader activeLogo={false} />
@@ -86,7 +96,7 @@ function Room({offers, reviews}: RoomProps): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  {<HostUser offer={offers[index]} />}
+                  {<HostUser offer={hotel} />}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -96,14 +106,14 @@ function Room({offers, reviews}: RoomProps): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <Reviews reviews={reviews} />
-                <FormNewComment />
+                {(authorizationStatus === AuthorizationStatus.Auth) && <FormNewComment />}
               </section>
             </div>
           </div>
           <Map
-            points={offers}
+            points={hotelsNearby}
             location={city.location}
-            selectedPoint={offers[index]}
+            selectedPoint={hotel}
             typePage='PropertyPage'
           />
         </section>
@@ -111,7 +121,7 @@ function Room({offers, reviews}: RoomProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <ListNearPlaces offers={offers.slice(0, 3)} />
+              <ListNearPlaces offers={hotelsNearby.slice(0, 3)} />
             </div>
           </section>
         </div>

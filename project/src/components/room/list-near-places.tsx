@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
 
 type ListNearPlacesProps = {
