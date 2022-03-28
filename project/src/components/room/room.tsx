@@ -27,8 +27,8 @@ function Room(): JSX.Element {
   useScrollTop();
 
   useEffect(() => {
-    dispatch(fetchReviewsAction(String(id)));
     dispatch(fetchHotelAction(String(id)));
+    dispatch(fetchReviewsAction(String(id)));
     dispatch(fetchHotelsNearbyAction(String(id)));
   }, [id, dispatch]);
 

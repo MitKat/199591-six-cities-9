@@ -26,6 +26,7 @@ export const fetchHotelAction = createAsyncThunk(
       const {data} = await api.get(`${APIRoute.Hotels}/${id}`);
       store.dispatch(loadHotel(data));
     } catch (error) {
+      store.dispatch(redirectToRoute(AppRoute.NotFound));
       errorHandle(error);
     }
   },
@@ -75,11 +76,9 @@ export const loginAction = createAsyncThunk(
     try {
       const response = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(response.data.token);
-      // const response = await api.get(APIRoute.Login);
-      // const response = {data};
       store.dispatch(saveUserData(response.data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      store.dispatch(redirectToRoute(AppRoute.Favorites));
+      store.dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
