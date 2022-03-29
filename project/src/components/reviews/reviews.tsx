@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import dayjs from 'dayjs';
-import { Review } from '../../mocks/reviews';
 import { getPercRating } from '../../utils';
+import { Review } from '../../types/review';
 
 type ReviewsProps = {
   reviews: Review[];
@@ -41,7 +41,7 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
               </div>
             </li>
           );
-        })}
+        }).reverse().slice(0, 10)}
       </ul>
     </Fragment>
   );

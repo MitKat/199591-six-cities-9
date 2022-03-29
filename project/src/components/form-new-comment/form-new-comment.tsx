@@ -1,4 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { newCommentAction } from '../../store/api-actions';
+import { CommentData } from '../../types/comment-data';
 
 const MIN_LENGTH_REVIEW = 50;
 const MAX_LENGTH_REVIEW = 300;
@@ -31,9 +34,15 @@ const starsReview = [
   },
 ];
 
-function FormNewComment(): JSX.Element {
+type FormNewCommentProps = {
+  hotelId: string;
+}
+
+function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
   const [textComment, setTextComment] = useState('');
   const [rating, setRating] = useState(0);
+
+  const dispatch = useAppDispatch();
 
   const textChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setTextComment(evt.target.value);
@@ -43,8 +52,25 @@ function FormNewComment(): JSX.Element {
     setRating(parseInt(evt.target.value, 10));
   };
 
+  const onSubmit = (commentData: CommentData) => {
+    dispatch(newCommentAction(commentData));
+  };
+
+  const resetForm = () => {
+    setRating(0);
+    setTextComment('');
+  };
+
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
+    onSubmit({
+      comment: textComment,
+      rating: rating,
+      hotelId: hotelId,
+    });
+
+    resetForm();
   };
 
   return (
@@ -69,7 +95,7 @@ function FormNewComment(): JSX.Element {
               </svg>
             </label>
           </>
-        ))}
+        )).reverse()}
       </div>
       <textarea
         className="reviews__textarea form__textarea"

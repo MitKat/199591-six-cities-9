@@ -6,6 +6,7 @@ import { loadHotel, loadHotelsNearby, loadOffers, loadReviews, redirectToRoute, 
 import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
+import { CommentData } from '../types/comment-data';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -93,6 +94,18 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const newCommentAction = createAsyncThunk(
+  'review/newComment',
+  async ({comment, rating, hotelId}: CommentData) => {
+    try {
+      const {data} = await api.post(`${APIRoute.Reviews}/${hotelId}`, {comment, rating});
+      store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
     }
