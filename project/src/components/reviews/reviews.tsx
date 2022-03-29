@@ -41,7 +41,7 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
               </div>
             </li>
           );
-        }).reverse().slice(0, 10)}
+        }).slice(-10).reverse()}
       </ul>
     </Fragment>
   );

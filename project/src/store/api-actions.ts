@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { loadHotel, loadHotelsNearby, loadOffers, loadReviews, redirectToRoute, requireAuthorization, saveUserData } from './action';
+import { isFormEnabled, loadHotel, loadHotelsNearby, loadOffers, loadReviews, redirectToRoute, requireAuthorization, saveUserData } from './action';
 import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
@@ -106,6 +106,7 @@ export const newCommentAction = createAsyncThunk(
     try {
       const {data} = await api.post(`${APIRoute.Reviews}/${hotelId}`, {comment, rating});
       store.dispatch(loadReviews(data));
+      store.dispatch(isFormEnabled(false));
     } catch (error) {
       errorHandle(error);
     }

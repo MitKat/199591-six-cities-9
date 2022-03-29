@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { isFormEnabled } from '../../store/action';
 import { newCommentAction } from '../../store/api-actions';
 import { CommentData } from '../../types/comment-data';
 
@@ -8,19 +9,9 @@ const MAX_LENGTH_REVIEW = 300;
 
 const starsReview = [
   {
-    id: 1,
-    name: '1-star',
-    title: 'terribly',
-  },
-  {
-    id: 2,
-    name: '2-star',
-    title: 'badly',
-  },
-  {
-    id: 3,
-    name: '3-star',
-    title: 'not bad',
+    id: 5,
+    name: '5-star',
+    title: 'perfect',
   },
   {
     id: 4,
@@ -28,9 +19,19 @@ const starsReview = [
     title: 'good',
   },
   {
-    id: 5,
-    name: '5-star',
-    title: 'perfect',
+    id: 3,
+    name: '3-star',
+    title: 'not bad',
+  },
+  {
+    id: 2,
+    name: '2-star',
+    title: 'badly',
+  },
+  {
+    id: 1,
+    name: '1-star',
+    title: 'terribly',
   },
 ];
 
@@ -41,6 +42,8 @@ type FormNewCommentProps = {
 function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
   const [textComment, setTextComment] = useState('');
   const [rating, setRating] = useState(0);
+
+  const isDisabled = useAppSelector((state) => state.isDisabled);
 
   const dispatch = useAppDispatch();
 
@@ -70,6 +73,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
       hotelId: hotelId,
     });
 
+    dispatch(isFormEnabled(true));
     resetForm();
   };
 
@@ -88,6 +92,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
               type="radio"
               checked={rating === star.id}
               onChange={ratingChangeHandle}
+              disabled={isDisabled}
             />
             <label htmlFor={String(star.id)} className="reviews__rating-label form__rating-label" title={star.title}>
               <svg className="form__star-image" width="37" height="33">
@@ -95,7 +100,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
               </svg>
             </label>
           </>
-        )).reverse()}
+        ))}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -104,6 +109,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
         value={textComment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={textChangeHandle}
+        disabled={isDisabled}
       >
       </textarea>
       <div className="reviews__button-wrapper">
