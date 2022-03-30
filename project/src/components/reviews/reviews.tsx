@@ -8,13 +8,14 @@ type ReviewsProps = {
 }
 
 function Reviews({reviews}: ReviewsProps): JSX.Element {
+  const reviewsSort = [...reviews].sort((reviewA, reviewB) => (Number(dayjs(reviewB.date)) - Number(dayjs(reviewA.date))));
   return (
     <Fragment>
       <h2 className="reviews__title">
         Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviews.map((review) => {
+        {reviewsSort.map((review) => {
           const {comment, user, id, rating, date} = review;
           const dateReview = dayjs(date).format('MMMM YYYY');
           return(
@@ -41,7 +42,7 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
               </div>
             </li>
           );
-        }).slice(-10).reverse()}
+        }).slice(-10)}
       </ul>
     </Fragment>
   );
