@@ -10,6 +10,8 @@ export const loadOffers = createAction('data/loadOffers', (payload: []) => ({pay
 
 export const loadReviews = createAction('data/loadReviews', (payload: []) => ({payload}));
 
+export const isFormEnabled = createAction('data/isFormEnabled', (payload: boolean) => ({payload}));
+
 export const loadHotelsNearby = createAction('data/loadHotelsNearby', (payload: []) => ({payload}));
 
 export const loadHotel = createAction('data/loadHotel', (payload) => ({payload}));

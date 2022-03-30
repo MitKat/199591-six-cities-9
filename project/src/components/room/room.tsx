@@ -106,7 +106,7 @@ function Room(): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <Reviews reviews={reviews} />
-                {(authorizationStatus === AuthorizationStatus.Auth) && <FormNewComment />}
+                {(authorizationStatus === AuthorizationStatus.Auth) && <FormNewComment hotelId={String(id)} />}
               </section>
             </div>
           </div>

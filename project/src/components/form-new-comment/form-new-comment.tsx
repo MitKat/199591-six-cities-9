@@ -1,23 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { isFormEnabled } from '../../store/action';
+import { newCommentAction } from '../../store/api-actions';
+import { CommentData } from '../../types/comment-data';
 
 const MIN_LENGTH_REVIEW = 50;
 const MAX_LENGTH_REVIEW = 300;
 
 const starsReview = [
   {
-    id: 1,
-    name: '1-star',
-    title: 'terribly',
-  },
-  {
-    id: 2,
-    name: '2-star',
-    title: 'badly',
-  },
-  {
-    id: 3,
-    name: '3-star',
-    title: 'not bad',
+    id: 5,
+    name: '5-star',
+    title: 'perfect',
   },
   {
     id: 4,
@@ -25,15 +19,33 @@ const starsReview = [
     title: 'good',
   },
   {
-    id: 5,
-    name: '5-star',
-    title: 'perfect',
+    id: 3,
+    name: '3-star',
+    title: 'not bad',
+  },
+  {
+    id: 2,
+    name: '2-star',
+    title: 'badly',
+  },
+  {
+    id: 1,
+    name: '1-star',
+    title: 'terribly',
   },
 ];
 
-function FormNewComment(): JSX.Element {
+type FormNewCommentProps = {
+  hotelId: string;
+}
+
+function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
   const [textComment, setTextComment] = useState('');
   const [rating, setRating] = useState(0);
+
+  const isDisabled = useAppSelector((state) => state.isDisabled);
+
+  const dispatch = useAppDispatch();
 
   const textChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setTextComment(evt.target.value);
@@ -43,8 +55,26 @@ function FormNewComment(): JSX.Element {
     setRating(parseInt(evt.target.value, 10));
   };
 
+  const onSubmit = (commentData: CommentData) => {
+    dispatch(newCommentAction(commentData));
+  };
+
+  const resetForm = () => {
+    setRating(0);
+    setTextComment('');
+  };
+
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
+    onSubmit({
+      comment: textComment,
+      rating: rating,
+      hotelId: hotelId,
+    });
+
+    dispatch(isFormEnabled(true));
+    resetForm();
   };
 
   return (
@@ -62,6 +92,7 @@ function FormNewComment(): JSX.Element {
               type="radio"
               checked={rating === star.id}
               onChange={ratingChangeHandle}
+              disabled={isDisabled}
             />
             <label htmlFor={String(star.id)} className="reviews__rating-label form__rating-label" title={star.title}>
               <svg className="form__star-image" width="37" height="33">
@@ -78,6 +109,7 @@ function FormNewComment(): JSX.Element {
         value={textComment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={textChangeHandle}
+        disabled={isDisabled}
       >
       </textarea>
       <div className="reviews__button-wrapper">

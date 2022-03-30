@@ -1,11 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CITIES, TypeSort } from '../const';
-import { changeCity, loadOffers, requireAuthorization, sortPlaces, saveUserData, loadReviews, loadHotel, loadHotelsNearby } from './action';
+import { changeCity, loadOffers, requireAuthorization, sortPlaces, saveUserData, loadReviews, loadHotel, loadHotelsNearby, isFormEnabled } from './action';
 
 const initialState = {
   currentCity: CITIES[0],
   currentSort: TypeSort.Popular,
   isDataLoaded: false,
+  isDisabled: false,
   offers: [],
   reviews: [],
   hotelsNearby: [],
@@ -69,6 +70,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(isFormEnabled, (state, action) => {
+      state.isDisabled = action.payload;
     })
     .addCase(loadHotel, (state, action) => {
       state.hotel = action.payload;
