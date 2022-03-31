@@ -1,34 +1,26 @@
 import MainHeader from '../main-header/main-header';
-import Reviews from '../reviews/reviews';
 import { getPercRating } from '../../utils';
 import HostUser from './host-user';
-import FormNewComment from '../form-new-comment/form-new-comment';
 import { useParams } from 'react-router-dom';
 import ListNearPlaces from './list-near-places';
 import Map from '../map/map';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import useScrollTop from '../../hooks/use-scroll-top';
-import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchHotelAction, fetchHotelsNearbyAction, fetchReviewsAction } from '../../store/api-actions';
-
-
+import { fetchHotelAction, fetchHotelsNearbyAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import ContainerReviews from '../container-reviews/container-reviews';
 
 function Room(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const reviews = useAppSelector((state) => state.reviews);
-  const hotel = useAppSelector((state) => state.hotel);
-  const hotelsNearby = useAppSelector((state) => state.hotelsNearby);
+  const hotel = useAppSelector(({DATA}) => DATA.hotel);
+  const hotelsNearby = useAppSelector(({DATA}) => DATA.hotelsNearby);
 
   useScrollTop();
 
   useEffect(() => {
     dispatch(fetchHotelAction(String(id)));
-    dispatch(fetchReviewsAction(String(id)));
     dispatch(fetchHotelsNearbyAction(String(id)));
   }, [id, dispatch]);
 
@@ -104,10 +96,7 @@ function Room(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <Reviews reviews={reviews} />
-                {(authorizationStatus === AuthorizationStatus.Auth) && <FormNewComment hotelId={String(id)} />}
-              </section>
+              <ContainerReviews />
             </div>
           </div>
           <Map

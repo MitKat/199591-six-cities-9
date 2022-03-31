@@ -1,3 +1,4 @@
+import React from 'react';
 import { Fragment } from 'react';
 import { Offer } from '../../types/offer';
 import PlaceCard from '../place-card/place-card';

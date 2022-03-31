@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TypeSort } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { sortPlaces } from '../../store/action';
+import { sortPlaces } from '../../store/main-process/main-process';
 
 type SortPlacesProps = {
   currentSort: string;
