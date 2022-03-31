@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -66,4 +67,4 @@ function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
   );
 }
 
-export default MainHeader;
+export default React.memo(MainHeader);
