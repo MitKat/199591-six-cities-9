@@ -4,6 +4,7 @@ import { generatePath, Link } from 'react-router-dom';
 import { getPercRating } from '../../utils';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import { AppRoute } from '../../const';
+import React from 'react';
 
 
 const nameCard = {
@@ -103,4 +104,4 @@ function PlaceCard({offerItem, typeCard, onListPlaceHover}: PlaceCardProps): JSX
   );
 }
 
-export default PlaceCard;
+export default React.memo(PlaceCard);

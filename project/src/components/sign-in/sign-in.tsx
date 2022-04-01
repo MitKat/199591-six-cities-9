@@ -1,10 +1,9 @@
 import { FormEvent, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import Logo from '../logo/logo';
+import LocationLogin from './location-login';
 
 function SignIn(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -74,13 +73,7 @@ function SignIn(): JSX.Element {
               </button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Main}>
-                <span>Amsterdam</span>
-              </Link>
-            </div>
-          </section>
+          <LocationLogin />
         </div>
       </main>
     </div>
