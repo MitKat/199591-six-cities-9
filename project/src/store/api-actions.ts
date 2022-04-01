@@ -2,11 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { isFormEnabled, loadHotel, loadHotelsNearby, loadOffers, loadReviews, redirectToRoute, requireAuthorization, saveUserData } from './action';
+import { redirectToRoute } from './action';
 import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
 import { CommentData } from '../types/comment-data';
+import { isFormEnabled, loadHotel, loadHotelsNearby, loadOffers, loadReviews } from './data-process/data-process';
+import { requireAuthorization, saveUserData } from './user-process/user-process';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',

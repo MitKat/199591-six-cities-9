@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -10,8 +11,8 @@ type MainHeaderProps = {
 
 
 function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+  const user = useAppSelector(({USER}) => USER.user);
   const dispatch = useAppDispatch();
 
   const isActive = activeLogo;
@@ -66,4 +67,4 @@ function MainHeader({activeLogo}: MainHeaderProps): JSX.Element {
   );
 }
 
-export default MainHeader;
+export default React.memo(MainHeader);

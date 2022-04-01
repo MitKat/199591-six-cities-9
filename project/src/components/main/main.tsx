@@ -16,7 +16,8 @@ type MainProps = {
 }
 
 function Main({offers}: MainProps): JSX.Element {
-  const {currentCity, currentSort, isDataLoaded} = useAppSelector((state) => state);
+  const {currentCity, currentSort} = useAppSelector(({MAIN}) => MAIN);
+  const {isDataLoaded} = useAppSelector(({DATA}) => DATA);
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
 
   const currentCityIndex = offers.findIndex((offer) => offer.city.name === currentCity);

@@ -18,7 +18,7 @@ type AppProps = {
 
 function App({favoriteOffers}: AppProps): JSX.Element {
 
-  const offers= useAppSelector((state) => state.offers);
+  const offers = useAppSelector(({DATA}) => DATA.offers);
 
   return (
     <HistoryRouter history={browserHistory}>

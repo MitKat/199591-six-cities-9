@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
 import { useEffect } from 'react';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, WIDTH_MARKER, HEIGHT_MARKER, ANCHOR_MARKER } from '../../const';
+import React from 'react';
 
 export enum MapContainer {
   MainPage = 'cities__map map',
@@ -62,4 +63,4 @@ function Map({typePage, points, location, selectedPoint}: MapProps) {
   );
 }
 
-export default Map;
+export default React.memo(Map);

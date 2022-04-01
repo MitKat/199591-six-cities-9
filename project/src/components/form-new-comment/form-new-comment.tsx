@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { isFormEnabled } from '../../store/action';
 import { newCommentAction } from '../../store/api-actions';
+import { isFormEnabled } from '../../store/data-process/data-process';
 import { CommentData } from '../../types/comment-data';
 
 const MIN_LENGTH_REVIEW = 50;
@@ -43,7 +43,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
   const [textComment, setTextComment] = useState('');
   const [rating, setRating] = useState(0);
 
-  const isDisabled = useAppSelector((state) => state.isDisabled);
+  const isDisabled = useAppSelector(({DATA}) => DATA.isDisabled);
 
   const dispatch = useAppDispatch();
 

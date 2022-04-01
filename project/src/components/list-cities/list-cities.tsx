@@ -1,7 +1,8 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, CITIES } from '../../const';
 import { useAppDispatch} from '../../hooks/index';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/main-process/main-process';
 
 type ListProps = {
   selectedCity: string;
@@ -30,4 +31,4 @@ function ListCities({selectedCity}: ListProps): JSX.Element {
   );
 }
 
-export default ListCities;
+export default React.memo(ListCities);

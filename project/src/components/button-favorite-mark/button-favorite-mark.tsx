@@ -1,3 +1,4 @@
+import React from 'react';
 
 const ClassNameButton = {
   Property: {
@@ -44,4 +45,4 @@ function ButtonFavoriteMark({isFavorite, size, typeMark}: ButtonFavoriteMarkProp
   );
 }
 
-export default ButtonFavoriteMark;
+export default React.memo(ButtonFavoriteMark);

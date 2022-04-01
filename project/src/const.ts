@@ -47,3 +47,9 @@ export enum TypeSort {
   Rating = 'Top rated first',
 }
 
+export enum NameSpace {
+  main = 'MAIN',
+  user = 'USER',
+  data = 'DATA',
+}
+
