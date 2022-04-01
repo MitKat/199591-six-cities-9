@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { TypeSort } from '../../const';
 import { useAppDispatch } from '../../hooks';
@@ -42,4 +43,4 @@ function SortPlaces({currentSort}: SortPlacesProps): JSX.Element {
   );
 }
 
-export default SortPlaces;
+export default React.memo(SortPlaces);

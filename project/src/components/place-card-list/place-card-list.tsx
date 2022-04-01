@@ -23,4 +23,4 @@ function PlaceCardList({offers, onListPlaceHover}: PlaceCardListProps): JSX.Elem
   );
 }
 
-export default PlaceCardList;
+export default React.memo(PlaceCardList);
