@@ -21,6 +21,7 @@ export type DataProcess = {
   isDisabled: boolean,
   hotel: Offer,
   hotelsNearby: Offer[],
+  favoritesOffer: Offer[],
 };
 
 export type State = ReturnType<typeof store.getState>;

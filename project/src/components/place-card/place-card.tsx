@@ -87,7 +87,7 @@ function PlaceCard({offerItem, typeCard, onListPlaceHover}: PlaceCardProps): JSX
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <ButtonFavoriteMark isFavorite={isFavorite} size='Small' typeMark='Place' />
+          <ButtonFavoriteMark isFavorite={isFavorite} size='Small' typeMark='Place' hotelId={String(id)}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

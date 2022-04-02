@@ -23,6 +23,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Reviews = '/comments',
+  Favorite = '/favorite',
 }
 
 export const WIDTH_MARKER = 40;

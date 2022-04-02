@@ -43,6 +43,7 @@ const initialState: DataProcess = {
     type: '',
   },
   hotelsNearby: [],
+  favoritesOffer: [],
 };
 
 export const dataProcess = createSlice({
@@ -65,6 +66,9 @@ export const dataProcess = createSlice({
     loadHotelsNearby: (state, action) => {
       state.hotelsNearby = action.payload;
     },
+    loadFavoritesOffer: (state, action) => {
+      state.favoritesOffer = action.payload;
+    },
   },
 });
 
@@ -74,4 +78,5 @@ export const {
   isFormEnabled,
   loadHotel,
   loadHotelsNearby,
+  loadFavoritesOffer,
 } = dataProcess.actions;

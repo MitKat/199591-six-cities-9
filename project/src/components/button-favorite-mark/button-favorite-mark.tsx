@@ -1,4 +1,8 @@
 import React from 'react';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { redirectToRoute } from '../../store/action';
+import { favoriteMarkAction } from '../../store/api-actions';
 
 const ClassNameButton = {
   Property: {
@@ -28,15 +32,35 @@ type ButtonFavoriteMarkProps = {
   isFavorite: boolean;
   size: 'Big' | 'Small';
   typeMark: 'Property' | 'Place';
+  hotelId: string;
 }
 
-function ButtonFavoriteMark({isFavorite, size, typeMark}: ButtonFavoriteMarkProps): JSX.Element {
-
+function ButtonFavoriteMark({isFavorite, size, typeMark, hotelId}: ButtonFavoriteMarkProps): JSX.Element {
   const sizeIcon = SizeMark[size];
   const className = ClassNameButton[typeMark];
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+
+  const favoriteHandle = () => {
+
+    const favoriteMarkData = {
+      id: Number(hotelId),
+      status: Number(!isFavorite),
+    };
+
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(favoriteMarkAction(favoriteMarkData));
+    } else {
+      dispatch(redirectToRoute(AppRoute.SignIn));
+    }
+
+  };
 
   return (
-    <button className={isFavorite ? className.Active : className.Normal} type="button">
+    <button className={isFavorite ? className.Active : className.Normal}
+      type="button"
+      onClick = {favoriteHandle}
+    >
       <svg className={className.Svg} width={sizeIcon.width} height={sizeIcon.height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

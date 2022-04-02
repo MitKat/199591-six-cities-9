@@ -51,7 +51,7 @@ function Room(): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <ButtonFavoriteMark isFavorite={isFavorite} size='Big' typeMark='Property' />
+                <ButtonFavoriteMark isFavorite={isFavorite} size='Big' typeMark='Property' hotelId={String(id)}/>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
