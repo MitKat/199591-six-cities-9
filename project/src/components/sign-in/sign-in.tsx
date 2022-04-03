@@ -1,5 +1,7 @@
 import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { redirectToRoute } from '../../store/action';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import Logo from '../logo/logo';
@@ -8,8 +10,13 @@ import LocationLogin from './location-login';
 function SignIn(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   const dispatch = useAppDispatch();
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    dispatch(redirectToRoute(AppRoute.Main));
+  }
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));

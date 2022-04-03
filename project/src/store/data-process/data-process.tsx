@@ -77,8 +77,7 @@ export const dataProcess = createSlice({
       const indexOffer = state.offers.findIndex((offer) => offer.id === id);
       state.offers[indexOffer] = action.payload;
 
-      const indexFavorite = state.favoritesOffer.findIndex((offer) => offer.id === id);
-      state.favoritesOffer.splice(indexFavorite, 1);
+      state.favoritesOffer = state.favoritesOffer.filter((offer) => offer.id !== id);
 
       const indexNearby = state.hotelsNearby.findIndex((offer) => offer.id === id);
       state.hotelsNearby[indexNearby] = action.payload;

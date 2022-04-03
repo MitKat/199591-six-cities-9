@@ -1,12 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
+import 'leaflet/dist/leaflet.css';
+import leaflet, { Marker } from 'leaflet';
 import { useRef } from 'react';
 import { Offer } from '../../types/offer';
 import { Location } from '../../types/location';
-import leaflet, { Marker } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, WIDTH_MARKER, HEIGHT_MARKER, ANCHOR_MARKER } from '../../const';
+import { SizeMarker, SizeAnchorMarker, UrlMarker } from '../../const';
 
 export enum MapContainer {
   MainPage = 'cities__map map',
@@ -21,15 +21,15 @@ type MapProps = {
 }
 
 const defaultCustomIcon = leaflet.icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [WIDTH_MARKER, HEIGHT_MARKER],
-  iconAnchor: [ANCHOR_MARKER, HEIGHT_MARKER],
+  iconUrl: UrlMarker.Default,
+  iconSize: [SizeMarker.Width, SizeMarker.Height],
+  iconAnchor: [SizeAnchorMarker.Width, SizeAnchorMarker.Height],
 });
 
 const currentCustomIcon = leaflet.icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [WIDTH_MARKER, HEIGHT_MARKER],
-  iconAnchor: [ANCHOR_MARKER, HEIGHT_MARKER],
+  iconUrl: UrlMarker.Current,
+  iconSize: [SizeMarker.Width, SizeMarker.Height],
+  iconAnchor: [SizeAnchorMarker.Width, SizeAnchorMarker.Height],
 });
 
 function Map({typePage, points, location, selectedPoint}: MapProps) {

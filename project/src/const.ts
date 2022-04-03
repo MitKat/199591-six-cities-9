@@ -28,11 +28,20 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
-export const WIDTH_MARKER = 40;
-export const HEIGHT_MARKER = 40;
-export const ANCHOR_MARKER = 20;
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export enum SizeMarker {
+  Width = 40,
+  Height = 40,
+}
+
+export enum SizeAnchorMarker {
+  Width = 20,
+  Height = 40,
+}
+
+export enum UrlMarker {
+  Default = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  Current = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+}
 
 export const CITIES = [
   'Paris',
