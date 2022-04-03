@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, CITIES } from '../../const';
+import { AppRoute, CITIES, RANDOM_INDEX } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { changeCity } from '../../store/main-process/main-process';
-import { getRandomNumber } from '../../utils';
-
 
 function LocationLogin(): JSX.Element {
-  const randomIndex = Number(getRandomNumber(0, CITIES.length-1));
-  const randomCity = CITIES[randomIndex];
+
+  const randomCity = CITIES[RANDOM_INDEX];
   const dispatch = useAppDispatch();
 
   return (

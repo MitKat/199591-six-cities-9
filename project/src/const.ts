@@ -1,3 +1,5 @@
+import { getRandomNumber } from './utils';
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -40,6 +42,8 @@ export const CITIES = [
   'Hamburg',
   'Dusseldorf',
 ];
+
+export const RANDOM_INDEX = Number(getRandomNumber(0, CITIES.length-1));
 
 export enum TypeSort {
   Popular = 'Popular',

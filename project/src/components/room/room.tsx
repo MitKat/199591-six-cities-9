@@ -1,14 +1,14 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import MainHeader from '../main-header/main-header';
 import { getPercRating } from '../../utils';
 import HostUser from './host-user';
-import { useParams } from 'react-router-dom';
 import ListNearPlaces from './list-near-places';
 import Map from '../map/map';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import useScrollTop from '../../hooks/use-scroll-top';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchHotelAction, fetchHotelsNearbyAction } from '../../store/api-actions';
-import { useEffect } from 'react';
 import ContainerReviews from '../container-reviews/container-reviews';
 
 function Room(): JSX.Element {

@@ -1,10 +1,10 @@
+import React from 'react';
 import { Offer } from '../../types/offer';
 import { useState } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { getPercRating } from '../../utils';
 import ButtonFavoriteMark from '../button-favorite-mark/button-favorite-mark';
 import { AppRoute } from '../../const';
-import React from 'react';
 
 
 const nameCard = {

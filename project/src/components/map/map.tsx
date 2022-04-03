@@ -1,12 +1,12 @@
+import React from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import { Offer } from '../../types/offer';
 import { Location } from '../../types/location';
-import { useRef } from 'react';
 import leaflet, { Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map';
-import { useEffect } from 'react';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, WIDTH_MARKER, HEIGHT_MARKER, ANCHOR_MARKER } from '../../const';
-import React from 'react';
 
 export enum MapContainer {
   MainPage = 'cities__map map',
