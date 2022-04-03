@@ -69,6 +69,20 @@ export const dataProcess = createSlice({
     loadFavoritesOffer: (state, action) => {
       state.favoritesOffer = action.payload;
     },
+    changeFavoriteMark: (state, action) => {
+      const {id} = action.payload;
+
+      state.hotel = action.payload;
+
+      const indexOffer = state.offers.findIndex((offer) => offer.id === id);
+      state.offers[indexOffer] = action.payload;
+
+      const indexFavorite = state.favoritesOffer.findIndex((offer) => offer.id === id);
+      state.favoritesOffer.splice(indexFavorite, 1);
+
+      const indexNearby = state.hotelsNearby.findIndex((offer) => offer.id === id);
+      state.hotelsNearby[indexNearby] = action.payload;
+    },
   },
 });
 
@@ -79,4 +93,5 @@ export const {
   loadHotel,
   loadHotelsNearby,
   loadFavoritesOffer,
+  changeFavoriteMark,
 } = dataProcess.actions;

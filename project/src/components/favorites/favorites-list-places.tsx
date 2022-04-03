@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import { FavoriteOffer } from '../../mocks/favoriteOffers';
+import { Offer } from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
 
 type FavoritesListPlacesProps = {
-  favoriteOffers: FavoriteOffer[];
+  favoriteOffers: Offer[];
 }
 
 function FavoritesListPlaces({favoriteOffers}: FavoritesListPlacesProps): JSX.Element {

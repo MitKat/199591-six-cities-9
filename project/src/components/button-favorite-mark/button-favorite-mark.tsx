@@ -42,13 +42,11 @@ function ButtonFavoriteMark({isFavorite, size, typeMark, hotelId}: ButtonFavorit
   const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   const favoriteHandle = () => {
-
-    const favoriteMarkData = {
-      id: Number(hotelId),
-      status: Number(!isFavorite),
-    };
-
     if (authorizationStatus === AuthorizationStatus.Auth) {
+      const favoriteMarkData = {
+        id: Number(hotelId),
+        status: Number(!isFavorite),
+      };
       dispatch(favoriteMarkAction(favoriteMarkData));
     } else {
       dispatch(redirectToRoute(AppRoute.SignIn));

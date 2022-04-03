@@ -7,7 +7,7 @@ import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
 import { CommentData } from '../types/comment-data';
-import { isFormEnabled, loadFavoritesOffer, loadHotel, loadHotelsNearby, loadOffers, loadReviews } from './data-process/data-process';
+import { changeFavoriteMark, isFormEnabled, loadFavoritesOffer, loadHotel, loadHotelsNearby, loadOffers, loadReviews } from './data-process/data-process';
 import { requireAuthorization, saveUserData } from './user-process/user-process';
 import { FavoriteMarkData } from '../types/favorite-mark-data';
 
@@ -77,11 +77,7 @@ export const favoriteMarkAction = createAsyncThunk(
   async ({id, status}: FavoriteMarkData) => {
     try {
       const {data} = await api.post(`${APIRoute.Favorite}/${id}/${status}`);
-
-      store.dispatch(loadHotel(data));
-      store.dispatch(fetchOffersAction());
-      store.dispatch(fetchFavoritesOfferAction());
-      store.dispatch(fetchHotelsNearbyAction(String(id)));
+      store.dispatch(changeFavoriteMark(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -125,6 +121,7 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      store.dispatch(fetchOffersAction());
     } catch (error) {
       errorHandle(error);
     }
