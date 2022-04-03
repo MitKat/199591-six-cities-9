@@ -1,11 +1,10 @@
+import { useState } from 'react';
 import MainHeader from '../main-header/main-header';
 import { Offer } from '../../types/offer';
-import { useState } from 'react';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Map from '../map/map';
 import { TypeSort } from '../../const';
 import { useAppSelector } from '../../hooks/index';
-
 import ListCities from '../list-cities/list-cities';
 import EmptyPlaceCardList from '../empty-place-card-list/empty-place-card-list';
 import FormSortPlaces from '../sort-places/sort-places';

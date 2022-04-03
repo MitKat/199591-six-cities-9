@@ -12,3 +12,13 @@ export function getListCity(offers: Offer[]) {
 
   return listCity;
 }
+
+export function getRandomNumber(number1: number, number2: number) {
+  if (number1 < 0 || number2 < 0) {
+    return null;
+  }
+  const min = Math.min(number1, number2);
+  const max = Math.max(number1, number2);
+
+  return Math.floor(Math.random() * (max-min+1)) + min;
+}

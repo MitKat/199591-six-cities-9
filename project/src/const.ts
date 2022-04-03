@@ -1,3 +1,5 @@
+import { getRandomNumber } from './utils';
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -23,13 +25,23 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Reviews = '/comments',
+  Favorite = '/favorite',
 }
 
-export const WIDTH_MARKER = 40;
-export const HEIGHT_MARKER = 40;
-export const ANCHOR_MARKER = 20;
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export enum SizeMarker {
+  Width = 40,
+  Height = 40,
+}
+
+export enum SizeAnchorMarker {
+  Width = 20,
+  Height = 40,
+}
+
+export enum UrlMarker {
+  Default = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  Current = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+}
 
 export const CITIES = [
   'Paris',
@@ -39,6 +51,8 @@ export const CITIES = [
   'Hamburg',
   'Dusseldorf',
 ];
+
+export const RANDOM_INDEX = Number(getRandomNumber(0, CITIES.length-1));
 
 export enum TypeSort {
   Popular = 'Popular',

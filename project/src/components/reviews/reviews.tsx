@@ -17,7 +17,7 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
       <ul className="reviews__list">
         {reviewsSort.map((review) => {
           const {comment, user, id, rating, date} = review;
-          const dateReview = dayjs(date).format('git MMMM YYYY');
+          const dateReview = dayjs(date).format('MMMM YYYY');
           return(
             <li className="reviews__item" key={id}>
               <div className="reviews__user user">

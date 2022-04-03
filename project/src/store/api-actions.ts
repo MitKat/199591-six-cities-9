@@ -7,8 +7,9 @@ import { UserData }  from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { errorHandle } from '../services/error-handle';
 import { CommentData } from '../types/comment-data';
-import { isFormEnabled, loadHotel, loadHotelsNearby, loadOffers, loadReviews } from './data-process/data-process';
+import { changeFavoriteMark, isFormEnabled, loadFavoritesOffer, loadHotel, loadHotelsNearby, loadOffers, loadReviews } from './data-process/data-process';
 import { requireAuthorization, saveUserData } from './user-process/user-process';
+import { FavoriteMarkData } from '../types/favorite-mark-data';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -59,6 +60,30 @@ export const fetchReviewsAction = createAsyncThunk(
   },
 );
 
+export const fetchFavoritesOfferAction = createAsyncThunk(
+  'data/fetchFavoritesOffer',
+  async () => {
+    try {
+      const {data} = await api.get(APIRoute.Favorite);
+      store.dispatch(loadFavoritesOffer(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const favoriteMarkAction = createAsyncThunk(
+  'data/favoriteMark',
+  async ({id, status}: FavoriteMarkData) => {
+    try {
+      const {data} = await api.post(`${APIRoute.Favorite}/${id}/${status}`);
+      store.dispatch(changeFavoriteMark(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
@@ -96,6 +121,7 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      store.dispatch(fetchOffersAction());
     } catch (error) {
       errorHandle(error);
     }

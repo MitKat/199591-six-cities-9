@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import { favoriteOffers } from './mocks/favoriteOffers';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { fetchOffersAction, checkAuthAction } from './store/api-actions';
@@ -15,9 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App
-        favoriteOffers = {favoriteOffers}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

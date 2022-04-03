@@ -43,6 +43,7 @@ const initialState: DataProcess = {
     type: '',
   },
   hotelsNearby: [],
+  favoritesOffer: [],
 };
 
 export const dataProcess = createSlice({
@@ -65,6 +66,22 @@ export const dataProcess = createSlice({
     loadHotelsNearby: (state, action) => {
       state.hotelsNearby = action.payload;
     },
+    loadFavoritesOffer: (state, action) => {
+      state.favoritesOffer = action.payload;
+    },
+    changeFavoriteMark: (state, action) => {
+      const {id} = action.payload;
+
+      state.hotel = action.payload;
+
+      const indexOffer = state.offers.findIndex((offer) => offer.id === id);
+      state.offers[indexOffer] = action.payload;
+
+      state.favoritesOffer = state.favoritesOffer.filter((offer) => offer.id !== id);
+
+      const indexNearby = state.hotelsNearby.findIndex((offer) => offer.id === id);
+      state.hotelsNearby[indexNearby] = action.payload;
+    },
   },
 });
 
@@ -74,4 +91,6 @@ export const {
   isFormEnabled,
   loadHotel,
   loadHotelsNearby,
+  loadFavoritesOffer,
+  changeFavoriteMark,
 } = dataProcess.actions;
