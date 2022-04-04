@@ -5,7 +5,7 @@ import { mainProcess } from './main-process/main-process';
 import { userProcess } from './user-process/user-process';
 
 export const rootReducer = combineReducers({
-  [NameSpace.data]: dataProcess.reducer,
-  [NameSpace.user]: userProcess.reducer,
-  [NameSpace.main]: mainProcess.reducer,
+  [NameSpace.Data]: dataProcess.reducer,
+  [NameSpace.User]: userProcess.reducer,
+  [NameSpace.Main]: mainProcess.reducer,
 });

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { INITIAL_HOTEL, NameSpace } from '../../const';
 import { DataProcess } from '../../types/state';
 
 const initialState: DataProcess = {
@@ -7,47 +7,13 @@ const initialState: DataProcess = {
   isDataLoaded: false,
   reviews: [],
   isDisabled: false,
-  hotel: {
-    bedrooms: 0,
-    city: {
-      location: {
-        latitude: 0,
-        longitude: 0,
-        zoom: 0,
-      },
-      name: '',
-    },
-    description: '',
-    goods: [],
-    host: {
-      avatarUrl: '',
-      id: 0,
-      isPro: false,
-      name: '',
-    },
-    location: {
-      latitude: 0,
-      longitude: 0,
-      zoom: 0,
-    },
-    id: -1,
-    images: [],
-    isFavorite: false,
-    isPremium: false,
-
-    maxAdults: 0,
-    previewImage: '',
-    price: 0,
-    rating: 0,
-    title: '',
-    type: '',
-  },
+  hotel: INITIAL_HOTEL,
   hotelsNearby: [],
   favoritesOffer: [],
 };
 
 export const dataProcess = createSlice({
-  name: NameSpace.data,
+  name: NameSpace.Data,
   initialState,
   reducers: {
     loadOffers: (state, action) => {

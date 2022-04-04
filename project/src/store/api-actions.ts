@@ -128,7 +128,7 @@ export const logoutAction = createAsyncThunk(
   },
 );
 
-export const newCommentAction = createAsyncThunk(
+export const sendComment = createAsyncThunk(
   'review/newComment',
   async ({comment, rating, hotelId}: CommentData) => {
     try {

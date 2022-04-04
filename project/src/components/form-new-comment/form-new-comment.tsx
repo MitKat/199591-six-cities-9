@@ -1,13 +1,13 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { newCommentAction } from '../../store/api-actions';
+import { sendComment } from '../../store/api-actions';
 import { isFormEnabled } from '../../store/data-process/data-process';
 import { CommentData } from '../../types/comment-data';
 
 const MIN_LENGTH_REVIEW = 50;
 const MAX_LENGTH_REVIEW = 300;
 
-const starsReview = [
+const STARS_REVIEW = [
   {
     id: 5,
     name: '5-star',
@@ -56,7 +56,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
   };
 
   const onSubmit = (commentData: CommentData) => {
-    dispatch(newCommentAction(commentData));
+    dispatch(sendComment(commentData));
   };
 
   const resetForm = () => {
@@ -81,11 +81,10 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
     <form className="reviews__form form" action="#" method="post" onSubmit={formSubmitHandle}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {starsReview.map((star) => (
-          <>
+        {STARS_REVIEW.map((star) => (
+          <Fragment key={star.id}>
             <input
               className="form__rating-input visually-hidden"
-              key={star.id}
               name={star.name}
               value={String(star.id)}
               id={String(star.id)}
@@ -99,7 +98,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </>
+          </Fragment>
         ))}
       </div>
       <textarea
@@ -119,7 +118,7 @@ function FormNewComment({hotelId}: FormNewCommentProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating === 0 || textComment.length < MIN_LENGTH_REVIEW || textComment.length > MAX_LENGTH_REVIEW}
+          disabled={rating === 0 || textComment.length <= MIN_LENGTH_REVIEW || textComment.length >= MAX_LENGTH_REVIEW}
         >
           Submit
         </button>

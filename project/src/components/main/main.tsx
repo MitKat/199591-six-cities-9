@@ -54,9 +54,7 @@ function Main({offers}: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <ListCities selectedCity={currentCity} />
-        {!isDataLoaded ?
-          <LoadingScreen />
-          :
+        {isDataLoaded ?
           <div className="cities">
             { (offersInCity.length === 0) ?
               <EmptyPlaceCardList city={currentCity} />
@@ -82,7 +80,9 @@ function Main({offers}: MainProps): JSX.Element {
                   />
                 </div>
               </div>}
-          </div>}
+          </div>
+          :
+          <LoadingScreen />}
       </main>
     </div>
   );

@@ -3,12 +3,15 @@ import dayjs from 'dayjs';
 import { getPercRating } from '../../utils';
 import { Review } from '../../types/review';
 
+const REVIEW_LIMIT = 10;
+
 type ReviewsProps = {
   reviews: Review[];
 }
 
 function Reviews({reviews}: ReviewsProps): JSX.Element {
   const reviewsSort = [...reviews].sort((reviewA, reviewB) => (Number(dayjs(reviewB.date)) - Number(dayjs(reviewA.date))));
+  reviewsSort.slice(-REVIEW_LIMIT);
   return (
     <Fragment>
       <h2 className="reviews__title">
@@ -42,7 +45,7 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
               </div>
             </li>
           );
-        }).slice(-10)}
+        })}
       </ul>
     </Fragment>
   );

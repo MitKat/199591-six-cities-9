@@ -8,10 +8,10 @@ export enum AppRoute {
   NotFound = '/*',
 }
 
-export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+export enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
 export enum AuthorizationStatus {
@@ -62,8 +62,52 @@ export enum TypeSort {
 }
 
 export enum NameSpace {
-  main = 'MAIN',
-  user = 'USER',
-  data = 'DATA',
+  Main = 'MAIN',
+  User = 'USER',
+  Data = 'DATA',
 }
 
+export const INITIAL_USER = {
+  email: '',
+  avatarUrl: '',
+  id: -1,
+  isPro: false,
+  name: '',
+  token: '',
+};
+
+export const INITIAL_HOTEL = {
+  bedrooms: 0,
+  city: {
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    },
+    name: '',
+  },
+  description: '',
+  goods: [],
+  host: {
+    avatarUrl: '',
+    id: 0,
+    isPro: false,
+    name: '',
+  },
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  id: -1,
+  images: [],
+  isFavorite: false,
+  isPremium: false,
+
+  maxAdults: 0,
+  previewImage: '',
+  price: 0,
+  rating: 0,
+  title: '',
+  type: '',
+};

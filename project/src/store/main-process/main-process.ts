@@ -8,7 +8,7 @@ const initialState: MainProcess = {
 };
 
 export const mainProcess = createSlice({
-  name: NameSpace.main,
+  name: NameSpace.Main,
   initialState,
   reducers: {
     changeCity: (state, action) => {
