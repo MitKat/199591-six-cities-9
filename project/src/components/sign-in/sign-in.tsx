@@ -1,5 +1,6 @@
 import { FormEvent, useRef } from 'react';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { toast } from 'react-toastify';
+import { AppRoute, AuthorizationStatus, ValidatePattern } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { redirectToRoute } from '../../store/action';
 import { loginAction } from '../../store/api-actions';
@@ -22,14 +23,21 @@ function SignIn(): JSX.Element {
     dispatch(loginAction(authData));
   };
 
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (emailRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        login: emailRef.current.value,
-        password: passwordRef.current.value,
-      });
+    if (emailRef.current !== null && passwordRef.current !== null ) {
+      const isValid = ValidatePattern.lettersPassword.test(passwordRef.current.value)
+                   && ValidatePattern.numbersPassword.test(passwordRef.current.value);
+      if (isValid) {
+        onSubmit({
+          login: emailRef.current.value,
+          password: passwordRef.current.value,
+        });
+      } else {
+        toast('Password must contain at least one letter and one number');
+      }
     }
   };
 

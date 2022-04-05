@@ -111,3 +111,8 @@ export const INITIAL_HOTEL = {
   title: '',
   type: '',
 };
+
+export const ValidatePattern = {
+  numbersPassword: /[0-9]+/,
+  lettersPassword: /[a-zA-Zа-яА-Я]+/,
+};

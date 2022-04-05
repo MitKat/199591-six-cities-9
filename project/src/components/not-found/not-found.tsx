@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute} from '../../const';
 import Logo from '../logo/logo';
+import './not-found.css';
 
 function NotFound(): JSX.Element {
   return (
@@ -15,13 +16,13 @@ function NotFound(): JSX.Element {
         </div>
       </header>
       <main className="page__main">
-        <section  style={{marginTop: 80, textAlign: 'center', fontStyle: 'italic'}}>
-          <h1 className="title">404. Page Not Found</h1>
+        <section className='not-found__title'>
+          <h1 >404. Page Not Found</h1>
         </section>
 
 
       </main>
-      <div style={{height: 480, marginTop: 80, textAlign: 'center'}}>
+      <div className='not-found__footer'>
         <Link to={AppRoute.Main}>Вернуться на главную страницу</Link>
       </div>
     </div>
